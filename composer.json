@@ -35,6 +35,9 @@
         ]
     },
     "config": {
+        "platform": {
+            "php": "8.3.0"
+        },
         "sort-packages": true
     }
 }
