@@ -1,0 +1,537 @@
+VPM/1
+title "Document Object Model - Wikipedia"
+url https://en.wikipedia.org/wiki/Document_Object_Model
+
+@e1 page [lang=en]
+  @e2 main
+    @e3 h1 "Document Object Model"
+    @e4 section
+      @e5 text "Computer document convention"
+      @e6 table
+        @e7 tbody
+          @e8 tr
+            @e9 th "Document Object Model (DOM)"
+          @e10 tr
+            @e11 td
+              @e12 a -> ../File:DOM-model.svg {?click, ?open}
+              @e13 text "Example of DOM hierarchy in an HTML document"
+          @e14 tr
+            @e15 th "Abbreviation"
+            @e16 td "DOM"
+          @e17 tr
+            @e18 th "Latest version"
+            @e19 td
+              @e20 text "DOM4"
+              @e21 sup
+                @e22 a "[ 1 ]" -> #cite_note-1 {?click, ?open}
+              @e23 br
+              @e24 text "November"
+              @e25 text "19, 2015"
+              @e26 text ";"
+              @e27 text "10 years ago"
+              @e28 text "("
+              @e29 text "2015-11-19"
+              @e30 text ")"
+          @e31 tr
+            @e32 th "Organization"
+            @e33 td
+              @e34 a "World Wide Web Consortium" -> ../World_Wide_Web_Consortium [title="World Wide Web Consortium"] {?click, ?open}
+              @e35 text ","
+              @e36 a "WHATWG" -> ../WHATWG [title=WHATWG] {?click, ?open}
+          @e37 tr
+            @e38 th "Base standards"
+            @e39 td
+              @e40 a "WHATWG DOM Living Standard" -> https://dom.spec.whatwg.org/ {?click, ?open}
+              @e41 br
+              @e42 a "W3C DOM4" -> https://www.w3.org/TR/dom/ {?click, ?open}
+      @e43 table [role=navigation]
+        @e44 tbody
+          @e45 tr
+            @e46 th
+              @e47 a "HTML" -> ../HTML [title=HTML] {?click, ?open}
+          @e48 tr
+            @e49 td
+              @e50 a "HTML5 logo" -> ../File:HTML5_logo_and_wordmark.svg {?click, ?open}
+          @e51 tr
+            @e52 th "HTML and variants"
+          @e53 tr
+            @e54 td
+              @e55 ul
+                @e56 li
+                  @e57 a "Dynamic HTML" -> ../Dynamic_HTML [title="Dynamic HTML"] {?click, ?open}
+                @e58 li
+                  @e59 a "HTML5" -> ../HTML5 [title=HTML5] {?click, ?open}
+                @e60 li
+                  @e61 a "XHTML" -> ../XHTML [title=XHTML] {?click, ?open}
+                  @e62 ul
+                    @e63 li
+                      @e64 a "XHTML Basic" -> ../XHTML_Basic [title="XHTML Basic"] {?click, ?open}
+                    @e65 li
+                      @e66 a "XHTML Mobile Profile" -> ../XHTML_Mobile_Profile [title="XHTML Mobile Profile"] {?click, ?open}
+          @e67 tr
+            @e68 th "HTML elements and attributes"
+          @e69 tr
+            @e70 td
+              @e71 ul
+                @e72 li
+                  @e73 a "HTML element" -> ../HTML_element [title="HTML element"] {?click, ?open}
+                  @e74 ul
+                    @e75 li
+                      @e76 a "Article element" -> ../Article_element [title="Article element"] {?click, ?open}
+                    @e77 li
+                      @e78 a "HTML audio" -> ../HTML_audio [title="HTML audio"] {?click, ?open}
+                    @e79 li
+                      @e80 a "Blink element" -> ../Blink_element [title="Blink element"] {?click, ?open}
+                    @e81 li
+                      @e82 a "Canvas element" -> ../Canvas_element [title="Canvas element"] {?click, ?open}
+                    @e83 li
+                      @e84 a "Div and span" -> ../Div_and_span [title="Div and span"] {?click, ?open}
+                    @e85 li
+                      @e86 a "Marquee element" -> ../Marquee_element [title="Marquee element"] {?click, ?open}
+                    @e87 li
+                      @e88 a "Meta element" -> ../Meta_element [title="Meta element"] {?click, ?open}
+                    @e89 li
+                      @e90 a "HTML video" -> ../HTML_video [title="HTML video"] {?click, ?open}
+                @e91 li
+                  @e92 a "HTML attribute" -> ../HTML_attribute [title="HTML attribute"] {?click, ?open}
+                  @e93 ul
+                    @e94 li
+                      @e95 a "Alt attribute" -> ../Alt_attribute [title="Alt attribute"] {?click, ?open}
+                @e96 li
+                  @e97 a "Frame (World Wide Web)" -> ../Frame_(World_Wide_Web) [title="Frame (World Wide Web)"] {?click, ?open}
+          @e98 tr
+            @e99 th "Editing"
+          @e100 tr
+            @e101 td
+              @e102 ul
+                @e103 li
+                  @e104 a "HTML editor" -> ../HTML_editor [title="HTML editor"] {?click, ?open}
+                @e105 li
+                  @e106 a "Text editor" -> ../Text_editor [title="Text editor"] {?click, ?open}
+          @e107 tr
+            @e108 th "Character encodings and language"
+          @e109 tr
+            @e110 td
+              @e111 ul
+                @e112 li
+                  @e113 a "Character encodings in HTML" -> ../Character_encodings_in_HTML [title="Character encodings in HTML"] {?click, ?open}
+                @e114 li
+                  @e115 a "List of XML and HTML character entity references" -> ../List_of_XML_and_HTML_character_entity_references [title="List of XML and HTML character entity references"] {?click, ?open}
+                @e116 li
+                  @e117 a "Unicode and HTML" -> ../Unicode_and_HTML [title="Unicode and HTML"] {?click, ?open}
+                @e118 li
+                  @e119 a "Language code" -> ../Language_code [title="Language code"] {?click, ?open}
+          @e120 tr
+            @e121 th "Document and browser models"
+          @e122 tr
+            @e123 td
+              @e124 ul
+                @e125 li
+                  @e126 a "Document Object Model" -> . {?click, ?open}
+                @e127 li
+                  @e128 a "Browser Object Model" -> ../Browser_Object_Model [title="Browser Object Model"] {?click, ?open}
+                @e129 li
+                  @e130 a "Style sheet (web development)" -> ../Style_sheet_(web_development) [title="Style sheet (web development)"] {?click, ?open}
+                  @e131 ul
+                    @e132 li
+                      @e133 a "CSS" -> ../CSS [title=CSS] {?click, ?open}
+                @e134 li
+                  @e135 a "Font family (HTML)" -> ../Font_family_(HTML) [title="Font family (HTML)"] {?click, ?open}
+                @e136 li
+                  @e137 a "Web colors" -> ../Web_colors [title="Web colors"] {?click, ?open}
+          @e138 tr
+            @e139 th "Client-side scripting and APIs"
+          @e140 tr
+            @e141 td
+              @e142 ul
+                @e143 li
+                  @e144 a "JavaScript" -> ../JavaScript [title=JavaScript] {?click, ?open}
+                  @e145 ul
+                    @e146 li
+                      @e147 a "WebCL" -> ../WebCL [title=WebCL] {?click, ?open}
+                    @e148 li
+                      @e149 a "Htmx" -> ../Htmx [title=Htmx] {?click, ?open}
+          @e150 tr
+            @e151 th "Graphics and Web3D technology"
+          @e152 tr
+            @e153 td
+              @e154 ul
+                @e155 li
+                  @e156 a "Web3D" -> ../Web3D [title=Web3D] {?click, ?open}
+                  @e157 ul
+                    @e158 li
+                      @e159 a "WebGL" -> ../WebGL [title=WebGL] {?click, ?open}
+                    @e160 li
+                      @e161 a "WebGPU" -> ../WebGPU [title=WebGPU] {?click, ?open}
+                    @e162 li
+                      @e163 a "WebXR" -> ../WebXR [title=WebXR] {?click, ?open}
+                @e164 li
+                  @e165 a "World Wide Web Consortium" -> ../World_Wide_Web_Consortium [title="World Wide Web Consortium"] {?click, ?open}
+                  @e166 ul
+                    @e167 li
+                      @e168 a "W3C Markup Validation Service" -> ../W3C_Markup_Validation_Service [title="W3C Markup Validation Service"] {?click, ?open}
+                @e169 li
+                  @e170 a "WHATWG" -> ../WHATWG [title=WHATWG] {?click, ?open}
+                @e171 li
+                  @e172 a "Quirks mode" -> ../Quirks_mode [title="Quirks mode"] {?click, ?open}
+                @e173 li
+                  @e174 a "Web storage" -> ../Web_storage [title="Web storage"] {?click, ?open}
+                @e175 li
+                  @e176 a "Browser engine" -> ../Browser_engine [title="Browser engine"] {?click, ?open}
+          @e177 tr
+            @e178 th "Comparisons"
+          @e179 tr
+            @e180 td
+              @e181 ul
+                @e182 li
+                  @e183 a "Comparison of document markup languages" -> ../Comparison_of_document_markup_languages [title="Comparison of document markup languages"] {?click, ?open}
+                @e184 li
+                  @e185 a "Comparison of browser engines" -> ../Comparison_of_browser_engines [title="Comparison of browser engines"] {?click, ?open}
+          @e186 tr
+            @e187 td
+              @e188 ul
+                @e189 li
+                  @e190 a "Template:HTML" -> ../Template:HTML [title="Template:HTML"] {?click, ?open}
+                @e191 li
+                  @e192 a "Template talk:HTML" -> ../Template_talk:HTML [title="Template talk:HTML"] {?click, ?open}
+                @e193 li
+                  @e194 a "Special:EditPage/Template:HTML" -> ../Special:EditPage/Template:HTML [title="Special:EditPage/Template:HTML"] {?click, ?open}
+      @e195 p
+        @e196 text "The"
+        @e197 b
+          @e198 text "Document Object Model"
+        @e199 text "("
+        @e200 b
+          @e201 text "DOM"
+        @e202 text ") is a"
+        @e203 a "Cross-platform" -> ../Cross-platform [title=Cross-platform] {?click, ?open}
+        @e204 sup
+          @e205 a "[ 2 ]" -> #cite_note-:0-2 {?click, ?open}
+        @e206 text "and"
+        @e207 a "Language-independent specification" -> ../Language-independent_specification [title="Language-independent specification"] {?click, ?open}
+        @e208 a "API" -> ../API [title=API] {?click, ?open}
+        @e209 text "that treats an"
+        @e210 a "HTML" -> ../HTML [title=HTML] {?click, ?open}
+        @e211 text "or"
+        @e212 a "XML" -> ../XML [title=XML] {?click, ?open}
+        @e213 text "document as a"
+        @e214 a "Tree structure" -> ../Tree_structure [title="Tree structure"] {?click, ?open}
+        @e215 text "wherein each"
+        @e216 a "Node (computer science)" -> ../Node_(computer_science) [title="Node (computer science)"] {?click, ?open}
+        @e217 text "is an"
+        @e218 a "Object (computer science)" -> ../Object_(computer_science) [title="Object (computer science)"] {?click, ?open}
+        @e219 text "representing a part of the document. The DOM represents a document with a logical tree. Each branch of the tree ends in a node, and each node contains objects. DOM methods allow programmatic access to the tree; with them one can change the structure, style or content of a document."
+        @e220 sup
+          @e221 a "[ 2 ]" -> #cite_note-:0-2 {?click, ?open}
+        @e222 text "Nodes can have"
+        @e223 a "Event handler" -> ../Event_handler [title="Event handler"] {?click, ?open}
+        @e224 text "(also known as event listeners) attached to them. Once an event is triggered, the event handlers get executed."
+        @e225 sup
+          @e226 a "[ 3 ]" -> #cite_note-Introduction-3 {?click, ?open}
+      @e227 p
+        @e228 text "The principal standardization of the DOM was handled by the"
+        @e229 a "World Wide Web Consortium" -> ../World_Wide_Web_Consortium [title="World Wide Web Consortium"] {?click, ?open}
+        @e230 text "(W3C), which last developed a recommendation in 2004."
+        @e231 a "WHATWG" -> ../WHATWG [title=WHATWG] {?click, ?open}
+        @e232 text "took over the development of the standard, publishing it as a"
+        @e233 a "Living document" -> ../Living_document [title="Living document"] {?click, ?open}
+        @e234 text ". The W3C now publishes stable snapshots of the WHATWG standard."
+      @e235 p
+        @e236 text "In HTML DOM (Document Object Model), every element is a node"
+        @e237 sup
+          @e238 text "["
+          @e239 i
+            @e240 a "Wikipedia:Please clarify" -> ../Wikipedia:Please_clarify [title="Wikipedia:Please clarify"] {?click, ?open}
+          @e241 text "]"
+        @e242 text ":"
+        @e243 sup
+          @e244 a "[ 4 ]" -> #cite_note-4 {?click, ?open}
+      @e245 ul
+        @e246 li "A document is a document node."
+        @e247 li "All HTML elements are element nodes."
+        @e248 li "All HTML attributes are attribute nodes."
+        @e249 li "Text inserted into HTML elements are text nodes."
+        @e250 li "Comments are comment nodes."
+    @e251 section "History"
+      @e252 h2 "History"
+      @e253 text "["
+      @e254 a "Edit section: History" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=1 [title="Edit section: History"] {?click, ?open}
+      @e255 text "]"
+      @e256 p
+        @e257 text "The history of the Document Object Model is intertwined with the history of the \""
+        @e258 a "Browser wars" -> ../Browser_wars [title="Browser wars"] {?click, ?open}
+        @e259 text "\" of the late 1990s between"
+        @e260 a "Netscape Navigator" -> ../Netscape_Navigator [title="Netscape Navigator"] {?click, ?open}
+        @e261 text "and"
+        @e262 a "Microsoft Internet Explorer" -> ../Microsoft_Internet_Explorer [title="Microsoft Internet Explorer"] {?click, ?open}
+        @e263 text ", as well as with that of"
+        @e264 a "JavaScript" -> ../JavaScript [title=JavaScript] {?click, ?open}
+        @e265 text "and"
+        @e266 a "JScript" -> ../JScript [title=JScript] {?click, ?open}
+        @e267 text ", the first"
+        @e268 a "Scripting language" -> ../Scripting_language [title="Scripting language"] {?click, ?open}
+        @e269 text "to be widely"
+        @e270 a "Implementation" -> ../Implementation [title=Implementation] {?click, ?open}
+        @e271 text "in the"
+        @e272 a "JavaScript engine" -> ../JavaScript_engine [title="JavaScript engine"] {?click, ?open}
+        @e273 text "of"
+        @e274 a "Web browser" -> ../Web_browser [title="Web browser"] {?click, ?open}
+        @e275 text "."
+        @e276 sup
+          @e277 text "["
+          @e278 i
+            @e279 a "Wikipedia:Citation needed" -> ../Wikipedia:Citation_needed [title="Wikipedia:Citation needed"] {?click, ?open}
+          @e280 text "]"
+      @e281 p
+        @e282 text "JavaScript was released by"
+        @e283 a "Netscape Communications" -> ../Netscape_Communications [title="Netscape Communications"] {?click, ?open}
+        @e284 text "in 1995 within Netscape Navigator 2.0. Netscape's competitor,"
+        @e285 a "Microsoft" -> ../Microsoft [title=Microsoft] {?click, ?open}
+        @e286 text ", released"
+        @e287 a "Internet Explorer 3" -> ../Internet_Explorer_3 [title="Internet Explorer 3"] {?click, ?open}
+        @e288 text "the following year with a reimplementation of JavaScript called JScript. JavaScript and JScript let"
+        @e289 a "Web developer" -> ../Web_developer [title="Web developer"] {?click, ?open}
+        @e290 text "create web pages with"
+        @e291 a "Client-side" -> ../Client-side [title=Client-side] {?click, ?open}
+        @e292 text "interactivity. The limited facilities for detecting user-generated"
+        @e293 a "Event (computing)" -> ../Event_(computing) [title="Event (computing)"] {?click, ?open}
+        @e294 text "and modifying the HTML document in the first generation of these languages eventually became known as \"DOM Level 0\" or \"Legacy DOM.\" No independent standard was developed for DOM Level 0, but it was partly described in the specifications for"
+        @e295 a "HTML4" -> ../HTML4 [title=HTML4] {?click, ?open}
+        @e296 text "."
+      @e297 p
+        @e298 text "Legacy DOM was limited in the kinds of"
+        @e299 a "HTML element" -> ../HTML_element [title="HTML element"] {?click, ?open}
+        @e300 text "that could be accessed."
+        @e301 a "Form (web)" -> ../Form_(web) [title="Form (web)"] {?click, ?open}
+        @e302 text ","
+        @e303 a "Hyperlink" -> ../Hyperlink [title=Hyperlink] {?click, ?open}
+        @e304 text "and image elements could be referenced with a hierarchical name that began with the root document object. A hierarchical name could make use of either the names or the"
+        @e305 a "Sequence" -> ../Sequence [title=Sequence] {?click, ?open}
+        @e306 text "of the traversed elements. For example, a"
+        @e307 a "Text box" -> ../Text_box [title="Text box"] {?click, ?open}
+        @e308 text "could be accessed as either"
+        @e309 code
+          @e310 text "document.myForm.myInput"
+        @e311 text "or"
+        @e312 code
+          @e313 text "document.forms[0].elements[0]"
+        @e314 text "."
+      @e315 p
+        @e316 text "The Legacy DOM enabled client-side form validation and simple interface interactivity like creating"
+        @e317 a "Tooltip" -> ../Tooltip [title=Tooltip] {?click, ?open}
+        @e318 text "."
+      @e319 p
+        @e320 text "In 1997, Netscape and Microsoft released version 4.0 of Netscape Navigator and Internet Explorer respectively, adding support for"
+        @e321 a "Dynamic HTML" -> ../Dynamic_HTML [title="Dynamic HTML"] {?click, ?open}
+        @e322 text "(DHTML) functionality enabling changes to a loaded HTML document. DHTML required extensions to the rudimentary document object that was available in the Legacy DOM implementations. Although the Legacy DOM implementations were largely compatible since JScript was based on JavaScript, the DHTML DOM extensions were developed in parallel by each browser maker and remained incompatible. These versions of the DOM became known as the \"Intermediate DOM\"."
+      @e323 p
+        @e324 text "After the standardization of"
+        @e325 a "ECMAScript" -> ../ECMAScript [title=ECMAScript] {?click, ?open}
+        @e326 text ", the"
+        @e327 a "World Wide Web Consortium" -> ../World_Wide_Web_Consortium [title="World Wide Web Consortium"] {?click, ?open}
+        @e328 text "DOM Working Group began drafting a standard DOM specification. The completed specification, known as \"DOM Level 1\", became a W3C Recommendation in late 1998. By 2005, large parts of W3C DOM were well-supported by common ECMAScript-enabled browsers, including"
+        @e329 a "Internet Explorer 6" -> ../Internet_Explorer_6 [title="Internet Explorer 6"] {?click, ?open}
+        @e330 text "(from 2001),"
+        @e331 a "Opera (web browser)" -> ../Opera_(web_browser) [title="Opera (web browser)"] {?click, ?open}
+        @e332 text ","
+        @e333 a "Safari (web browser)" -> ../Safari_(web_browser) [title="Safari (web browser)"] {?click, ?open}
+        @e334 text "and"
+        @e335 a "Gecko (layout engine)" -> ../Gecko_(layout_engine) [title="Gecko (layout engine)"] {?click, ?open}
+        @e336 text "-based browsers (like"
+        @e337 a "Mozilla Application Suite" -> ../Mozilla_Application_Suite [title="Mozilla Application Suite"] {?click, ?open}
+        @e338 text ","
+        @e339 a "Mozilla Firefox" -> ../Mozilla_Firefox [title="Mozilla Firefox"] {?click, ?open}
+        @e340 text ","
+        @e341 a "SeaMonkey" -> ../SeaMonkey [title=SeaMonkey] {?click, ?open}
+        @e342 text "and"
+        @e343 a "Camino (web browser)" -> ../Camino_(web_browser) [title="Camino (web browser)"] {?click, ?open}
+        @e344 text ")."
+    @e345 section "Standards"
+      @e346 h2 "Standards"
+      @e347 text "["
+      @e348 a "Edit section: Standards" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=2 [title="Edit section: Standards"] {?click, ?open}
+      @e349 text "]"
+      @e350 figure
+        @e351 a -> ../File:WHATWG_DOM.png {?click, ?open}
+        @e352 figcaption
+          @e353 text "WHATWG DOM"
+      @e354 p
+        @e355 text "The"
+        @e356 a "W3C" -> ../W3C [title=W3C] {?click, ?open}
+        @e357 text "DOM Working Group published its final recommendation and subsequently disbanded in 2004. Development efforts migrated to the"
+        @e358 a "WHATWG" -> ../WHATWG [title=WHATWG] {?click, ?open}
+        @e359 text ", which continues to maintain a living standard."
+        @e360 sup
+          @e361 a "[ 5 ]" -> #cite_note-5 {?click, ?open}
+        @e362 text "In 2009, the Web Applications group reorganized DOM activities at the W3C."
+        @e363 sup
+          @e364 a "[ 6 ]" -> #cite_note-6 {?click, ?open}
+        @e365 text "In 2013, due to a lack of progress and the impending release of"
+        @e366 a "HTML5" -> ../HTML5 [title=HTML5] {?click, ?open}
+        @e367 text ", the DOM Level 4 specification was reassigned to the"
+        @e368 a "HTML Working Group" -> ../HTML_Working_Group [title="HTML Working Group"] {?click, ?open}
+        @e369 text "to expedite its completion."
+        @e370 sup
+          @e371 a "[ 7 ]" -> #cite_note-7 {?click, ?open}
+        @e372 text "Meanwhile, in 2015, the Web Applications group was disbanded and DOM stewardship passed to the Web Platform group."
+        @e373 sup
+          @e374 a "[ 8 ]" -> #cite_note-8 {?click, ?open}
+        @e375 text "Beginning with the publication of DOM Level 4 in 2015, the W3C creates new recommendations based on snapshots of the WHATWG standard."
+      @e376 ul
+        @e377 li
+          @e378 text "DOM Level 1 provided a complete model for an entire HTML or"
+          @e379 a "XML" -> ../XML [title=XML] {?click, ?open}
+          @e380 text "document, including the means to change any portion of the document."
+        @e381 li
+          @e382 text "DOM Level 2 was published in late 2000. It introduced the"
+          @e383 code
+            @e384 text "getElementById"
+          @e385 text "function as well as an"
+          @e386 a "DOM Events" -> ../DOM_Events [title="DOM Events"] {?click, ?open}
+          @e387 text "and support for"
+          @e388 a "XML namespace" -> ../XML_namespace [title="XML namespace"] {?click, ?open}
+          @e389 text "and CSS."
+        @e390 li
+          @e391 text "DOM Level 3, published in April 2004, added support for"
+          @e392 a "XPath" -> ../XPath [title=XPath] {?click, ?open}
+          @e393 text "and keyboard"
+          @e394 a "Event handling" -> ../Event_handling [title="Event handling"] {?click, ?open}
+          @e395 text ", as well as an interface for"
+          @e396 a "Serialization" -> ../Serialization [title=Serialization] {?click, ?open}
+          @e397 text "documents as XML."
+        @e398 li "HTML5 was published in October 2014. Part of HTML5 had replaced DOM Level 2 HTML module."
+        @e399 li
+          @e400 text "DOM Level 4 was published in 2015 and retired in November 2020."
+          @e401 sup
+            @e402 a "[ 9 ]" -> #cite_note-9 {?click, ?open}
+        @e403 li
+          @e404 a "DOM 2020-06" -> https://dom.spec.whatwg.org/review-drafts/2020-06/ {?click, ?open}
+          @e405 text "was published in September 2021 as a W3C Recommendation."
+          @e406 sup
+            @e407 a "[ 10 ]" -> #cite_note-10 {?click, ?open}
+          @e408 text "It is a snapshot of the WHATWG living standard."
+    @e409 section "Applications"
+      @e410 h2 "Applications"
+      @e411 text "["
+      @e412 a "Edit section: Applications" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=3 [title="Edit section: Applications"] {?click, ?open}
+      @e413 text "]"
+      @e414 section "Web browsers"
+        @e415 h3 "Web browsers"
+        @e416 text "["
+        @e417 a "Edit section: Web browsers" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=4 [title="Edit section: Web browsers"] {?click, ?open}
+        @e418 text "]"
+        @e419 p
+          @e420 text "To"
+          @e421 a "Web browser engine" -> ../Web_browser_engine [title="Web browser engine"] {?click, ?open}
+          @e422 text "a document such as a HTML page, most web browsers use an internal model similar to the DOM. The nodes of every document are organized in a"
+          @e423 a "Tree structure" -> ../Tree_structure [title="Tree structure"] {?click, ?open}
+          @e424 text ", called the"
+          @e425 i
+            @e426 text "DOM tree"
+          @e427 text ", with the topmost node named as \"Document object\". When an HTML page is rendered in browsers, the browser downloads the HTML into local memory and automatically parses it to display the page on screen. However, the DOM does not necessarily need to be represented as a tree,"
+          @e428 sup
+            @e429 a "[ 11 ]" -> #cite_note-Level3-Introduction-11 {?click, ?open}
+          @e430 text "and some browsers have used other internal models."
+          @e431 sup
+            @e432 a "[ 12 ]" -> #cite_note-Modernizing-Dom-12 {?click, ?open}
+      @e433 section "JavaScript"
+        @e434 h3 "JavaScript"
+        @e435 text "["
+        @e436 a "Edit section: JavaScript" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=5 [title="Edit section: JavaScript"] {?click, ?open}
+        @e437 text "]"
+        @e438 p
+          @e439 text "When a web page is loaded, the browser creates a Document Object Model of the page, which is an object oriented representation of an HTML document that acts as an interface between JavaScript and the document itself. This allows the creation of"
+          @e440 a "Dynamic web page" -> ../Dynamic_web_page [title="Dynamic web page"] {?click, ?open}
+          @e441 text ","
+          @e442 sup
+            @e443 a "[ 13 ]" -> #cite_note-13 {?click, ?open}
+          @e444 text "because within a page JavaScript can:"
+        @e445 ul
+          @e446 li "add, change, and remove any of the HTML elements and attributes"
+          @e447 li "change any of the CSS styles"
+          @e448 li "react to all the existing events"
+          @e449 li "create new events"
+    @e450 section "DOM tree structure"
+      @e451 h2 "DOM tree structure"
+      @e452 text "["
+      @e453 a "Edit section: DOM tree structure" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=6 [title="Edit section: DOM tree structure"] {?click, ?open}
+      @e454 text "]"
+      @e455 p
+        @e456 text "A Document Object Model (DOM) tree is a hierarchical representation of an HTML or"
+        @e457 a "XML" -> ../XML [title=XML] {?click, ?open}
+        @e458 text "document. It consists of a root node, which is the document itself, and a series of child nodes that represent the elements, attributes, and text content of the document. Each node in the tree has a parent node, except for the root node, and can have multiple child nodes."
+      @e459 section "Elements as nodes"
+        @e460 h3 "Elements as nodes"
+        @e461 text "["
+        @e462 a "Edit section: Elements as nodes" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=7 [title="Edit section: Elements as nodes"] {?click, ?open}
+        @e463 text "]"
+        @e464 p "Elements in an HTML or XML document are represented as nodes in the DOM tree. Each element node has a tag name and attributes, and can contain other element nodes or text nodes as children. For example, an HTML document with the following structure:"
+        @e465 pre
+          @e466 text "<"
+          @e467 text "html"
+          @e468 text ">"
+          @e469 text "<"
+          @e470 text "head"
+          @e471 text ">"
+          @e472 text "<"
+          @e473 text "title"
+          @e474 text ">"
+          @e475 text "My Website"
+          @e476 text "</"
+          @e477 text "title"
+          @e478 text ">"
+          @e479 text "</"
+          @e480 text "head"
+          @e481 text ">"
+          @e482 text "<"
+          @e483 text "body"
+          @e484 text ">"
+          @e485 text "<"
+          @e486 text "h1"
+          @e487 text ">"
+          @e488 text "Welcome to DOM"
+          @e489 text "</"
+          @e490 text "h1"
+          @e491 text ">"
+          @e492 text "<"
+          @e493 text "p"
+          @e494 text ">"
+          @e495 text "This is my website."
+          @e496 text "</"
+          @e497 text "p"
+          @e498 text ">"
+          @e499 text "</"
+          @e500 text "body"
+          @e501 text ">"
+          @e502 text "</"
+          @e503 text "html"
+          @e504 text ">"
+        @e505 p "will be represented in the DOM tree as:"
+        @e506 pre
+          @e507 text "- Document (root) - html - head - title - \"My Website\" - body - h1 - \"Welcome to DOM\" - p - \"This is my website.\""
+      @e508 section "Text nodes"
+        @e509 h3 "Text nodes"
+        @e510 text "["
+        @e511 a "Edit section: Text nodes" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=8 [title="Edit section: Text nodes"] {?click, ?open}
+        @e512 text "]"
+        @e513 p "Text content within an element is represented as a text node in the DOM tree. Text nodes do not have attributes or child nodes and are therefore always leaf nodes in the tree. For example, the text content \"My Website\" in the title element and \"Welcome\" in the h1 element are both represented as text nodes."
+      @e514 section "Attributes as properties"
+        @e515 h3 "Attributes as properties"
+        @e516 text "["
+        @e517 a "Edit section: Attributes as properties" -> ../../w/index.php?title=Document_Object_Model&action=edit&section=9 [title="Edit section: Attributes as properties"] {?click, ?open}
+        @e518 text "]"
+        @e519 p "Attributes of an element are represented as properties of the element node in the DOM tree. For example, an element with the following HTML:"
+        @e520 pre
+          @e521 text "<"
+          @e522 text "a"
+          @e523 text "href"
+          @e524 text "="
+          @e525 text "\"https://example.com\""
+          @e526 text ">"
+          @e527 text "Link"
+          @e528 text "</"
+          @e529 text "a"
+          @e530 text ">"
+        @e531 p "will be represented in the DOM tree as:"
+        @e532 pre
+          @e533 text "- a - href: \"https://example.com\" - \"Link\""

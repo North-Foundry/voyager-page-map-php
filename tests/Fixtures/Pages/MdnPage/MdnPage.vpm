@@ -1,0 +1,254 @@
+VPM/1
+title "Document Object Model (DOM) - Web APIs | MDN"
+url https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
+
+@e1 page [lang=en-US]
+  @e2 main
+    @e3 mdn-survey
+    @e4 h1 "Document Object Model (DOM)"
+    @e5 section
+      @e6 p "The Document Object Model ( DOM ) connects web pages to scripts or programming languages by representing the structure of a document—such as the HTML representing a web page—in memory. Usually it refers to JavaScript, even though modeling HTML, SVG, or XML documents as objects are not part of the core JavaScript language."
+      @e7 p "The DOM represents a document with a logical tree. Each branch of the tree ends in a node, and each node contains objects. DOM methods allow programmatic access to the tree. With them, you can change the document's structure, style, or content."
+      @e8 p "Nodes can also have event handlers attached to them. Once an event is triggered, the event handlers get executed."
+    @e9 aside
+      @e10 nav
+        @e11 h2 "In this article"
+        @e12 ul
+          @e13 li
+            @e14 a "Concepts and usage" -> #concepts_and_usage {?click, ?open}
+          @e15 li
+            @e16 a "DOM interfaces" -> #dom_interfaces {?click, ?open}
+          @e17 li
+            @e18 a "HTML DOM" -> #html_dom {?click, ?open}
+          @e19 li
+            @e20 a "SVG DOM" -> #svg_dom {?click, ?open}
+          @e21 li
+            @e22 a "Examples" -> #examples {?click, ?open}
+          @e23 li
+            @e24 a "Specifications" -> #specifications {?click, ?open}
+          @e25 li
+            @e26 a "See also" -> #see_also {?click, ?open}
+      @e27 mdn-placement-sidebar
+    @e28 section "Concepts and usage"
+      @e29 h2
+        @e30 a "Concepts and usage" -> #concepts_and_usage {?click, ?open}
+      @e31 p "The Document Object Model (DOM) is a programming interface for web documents. It represents the page so that programs can change the document structure, style, and content. The DOM represents the document as nodes and objects; that way, programming languages can interact with the page."
+      @e32 p "A web page is a document that can be either displayed in the browser window or as the HTML source. In both cases, it is the same document but the Document Object Model (DOM) representation allows it to be manipulated. As an object-oriented representation of the web page, it can be modified with a scripting language such as JavaScript."
+      @e33 p
+        @e34 text "For example, the DOM specifies that the"
+        @e35 code
+          @e36 text "querySelectorAll"
+        @e37 text "method in this code snippet must return a list of all the"
+        @e38 a "<p>" -> ../../HTML/Reference/Elements/p {?click, ?open}
+        @e39 text "elements in the document:"
+      @e40 text "js"
+      @e41 pre
+        @e42 code
+          @e43 text "const paragraphs = document.querySelectorAll(\"p\"); // paragraphs[0] is the first <p> element // paragraphs[1] is the second <p> element, etc. alert(paragraphs[0].nodeName);"
+      @e44 p
+        @e45 text "All of the properties, methods, and events available for manipulating and creating web pages are organized into objects. For example, the"
+        @e46 code
+          @e47 text "document"
+        @e48 text "object that represents the document itself, any"
+        @e49 code
+          @e50 text "table"
+        @e51 text "objects that implement the"
+        @e52 a "HTMLTableElement" -> ../HTMLTableElement {?click, ?open}
+        @e53 text "DOM interface for accessing HTML tables, and so forth, are all objects."
+      @e54 p
+        @e55 text "The DOM is built using multiple APIs that work together. The core DOM defines the entities describing any document and the objects within it. This is expanded upon as needed by other APIs that add new features and capabilities to the DOM. For example, the"
+        @e56 a "HTML DOM API" -> ../HTML_DOM_API {?click, ?open}
+        @e57 text "adds support for representing HTML documents to the core DOM, and the SVG API adds support for representing SVG documents."
+    @e58 section "What is a DOM tree?"
+      @e59 h3
+        @e60 a "What is a DOM tree?" -> #what_is_a_dom_tree {?click, ?open}
+      @e61 p
+        @e62 text "A"
+        @e63 strong
+          @e64 text "DOM tree"
+        @e65 text "is a"
+        @e66 a "External link (opens in new tab)" -> https://en.wikipedia.org/wiki/Tree_structure [title="External link (opens in new tab)"] {?click, ?open}
+        @e67 text "whose nodes represent an HTML or XML document's contents. Each HTML or XML document has a DOM tree representation. For example, consider the following document:"
+      @e68 text "html"
+      @e69 pre
+        @e70 code
+          @e71 text "<html lang=\"en\"> <head> <title>My Document</title> </head> <body> <h1>Header</h1> <p>Paragraph</p> </body> </html>"
+      @e72 p "It has a DOM tree that looks like this:"
+      @e73 p
+        @e74 img "The DOM as a tree-like representation of a document that has a root and node elements containing content" [alt="The DOM as a tree-like representation of a document that has a root and node elements containing content"]
+      @e75 p
+        @e76 text "Although the above tree is similar to the above document's DOM tree, they're not identical, as the actual DOM tree preserves"
+        @e77 a "whitespace" -> ../../CSS/Guides/Text/Whitespace {?click, ?open}
+        @e78 text "."
+      @e79 p "When a web browser parses an HTML document, it builds a DOM tree and then uses it to display the document."
+    @e80 section "DOM and JavaScript"
+      @e81 h3
+        @e82 a "DOM and JavaScript" -> #dom_and_javascript {?click, ?open}
+      @e83 p
+        @e84 text "The previous short example, like nearly all examples, is"
+        @e85 a "JavaScript" -> ../../../Glossary/JavaScript {?click, ?open}
+        @e86 text ". That is to say, it is"
+        @e87 em
+          @e88 text "written"
+        @e89 text "in JavaScript, but"
+        @e90 em
+          @e91 text "uses"
+        @e92 text "the DOM to access the document and its elements. The DOM is not a programming language, but without it, the JavaScript language wouldn't have any model or notion of web pages, HTML documents, SVG documents, and their component parts. The document as a whole, the head, tables within the document, table headers, text within the table cells, and all other elements in a document are parts of the document object model for that document. They can all be accessed and manipulated using the DOM and a scripting language like JavaScript."
+      @e93 p "The DOM is not part of the JavaScript language, but is instead a Web API used to build websites. JavaScript can also be used in other contexts. For example, Node.js runs JavaScript programs on a computer, but provides a different set of APIs, and the DOM API is not a core part of the Node.js runtime."
+      @e94 p "The DOM was designed to be independent of any particular programming language, making the structural representation of the document available from a single, consistent API. Even if most web developers will only use the DOM through JavaScript, implementations of the DOM can be built for any language, as this Python example demonstrates:"
+      @e95 text "python"
+      @e96 pre
+        @e97 code
+          @e98 text "# Python DOM example import xml.dom.minidom as m doc = m.parse(r\"C:\\Projects\\Py\\chap1.xml\") doc.nodeName # DOM property of document object p_list = doc.getElementsByTagName(\"para\")"
+      @e99 p
+        @e100 text "For more information on what technologies are involved in writing JavaScript on the web, see"
+        @e101 a "JavaScript technologies overview" -> ../../JavaScript/Reference/JavaScript_technologies_overview {?click, ?open}
+        @e102 text "."
+    @e103 section "Accessing the DOM"
+      @e104 h3
+        @e105 a "Accessing the DOM" -> #accessing_the_dom {?click, ?open}
+      @e106 p "You don't have to do anything special to begin using the DOM. You use the API directly in JavaScript from within what is called a script , a program run by a browser."
+      @e107 p
+        @e108 text "When you create a script, whether inline in a"
+        @e109 code
+          @e110 text "<script>"
+        @e111 text "element or included in the web page, you can immediately begin using the API for the"
+        @e112 a "document" -> ../Document {?click, ?open}
+        @e113 text "or"
+        @e114 a "window" -> ../Window [title=window] {?click, ?open}
+        @e115 text "objects to manipulate the document itself, or any of the various elements in the web page (the descendant elements of the document). Your DOM programming may be something as simple as the following example, which displays a message on the console by using the"
+        @e116 a "console.log()" -> ../console/log_static [title="console.log()"] {?click, ?open}
+        @e117 text "function:"
+      @e118 text "html"
+      @e119 pre
+        @e120 code
+          @e121 text "<body onload=\"console.log('Welcome to my home page!');\"> … </body>"
+      @e122 p "As it is generally not recommended to mix the structure of the page (written in HTML) and manipulation of the DOM (written in JavaScript), the JavaScript parts will be grouped together here, and separated from the HTML."
+      @e123 p
+        @e124 text "For example, the following function creates a new"
+        @e125 a "h1" -> ../../HTML/Reference/Elements/Heading_Elements {?click, ?open}
+        @e126 text "element, adds text to that element, and then adds it to the tree for the document:"
+      @e127 text "html"
+      @e128 pre
+        @e129 code
+          @e130 text "<html lang=\"en\"> <head> </head> <body> <script> // create a couple of elements in an otherwise empty HTML page const heading = document.createElement(\"h1\"); const headingText = document.createTextNode(\"Big Head!\"); heading.appendChild(headingText); document.body.appendChild(heading); </script> </body> </html>"
+    @e131 section "DOM interfaces"
+      @e132 h2
+        @e133 a "DOM interfaces" -> #dom_interfaces {?click, ?open}
+      @e134 p "The following are all interfaces defined by the DOM specification:"
+      @e135 ul
+        @e136 li
+          @e137 a "AbortController" -> ../AbortController {?click, ?open}
+        @e138 li
+          @e139 a "AbortSignal" -> ../AbortSignal {?click, ?open}
+        @e140 li
+          @e141 a "AbstractRange" -> ../AbstractRange {?click, ?open}
+        @e142 li
+          @e143 a "Attr" -> ../Attr {?click, ?open}
+        @e144 li
+          @e145 a "CDATASection" -> ../CDATASection {?click, ?open}
+        @e146 li
+          @e147 a "CharacterData" -> ../CharacterData {?click, ?open}
+        @e148 li
+          @e149 a "Comment" -> ../Comment {?click, ?open}
+        @e150 li
+          @e151 a "CustomEvent" -> ../CustomEvent {?click, ?open}
+        @e152 li
+          @e153 a "Document" -> ../Document {?click, ?open}
+        @e154 li
+          @e155 a "DocumentFragment" -> ../DocumentFragment {?click, ?open}
+        @e156 li
+          @e157 a "DocumentType" -> ../DocumentType {?click, ?open}
+        @e158 li
+          @e159 a "DOMError" -> ../DOMError {?click, ?open}
+          @e160 span "Deprecated" [role=img, title="Deprecated. Not for use in new websites."]
+        @e161 li
+          @e162 a "DOMException" -> ../DOMException {?click, ?open}
+        @e163 li
+          @e164 a "DOMImplementation" -> ../DOMImplementation {?click, ?open}
+        @e165 li
+          @e166 a "DOMParser" -> ../DOMParser {?click, ?open}
+        @e167 li
+          @e168 a "DOMTokenList" -> ../DOMTokenList {?click, ?open}
+        @e169 li
+          @e170 a "Element" -> ../Element {?click, ?open}
+        @e171 li
+          @e172 a "Event" -> ../Event {?click, ?open}
+        @e173 li
+          @e174 a "EventTarget" -> ../EventTarget {?click, ?open}
+        @e175 li
+          @e176 a "HTMLCollection" -> ../HTMLCollection {?click, ?open}
+        @e177 li
+          @e178 a "MutationObserver" -> ../MutationObserver {?click, ?open}
+        @e179 li
+          @e180 a "MutationRecord" -> ../MutationRecord {?click, ?open}
+        @e181 li
+          @e182 a "NamedNodeMap" -> ../NamedNodeMap {?click, ?open}
+        @e183 li
+          @e184 a "Node" -> ../Node {?click, ?open}
+        @e185 li
+          @e186 a "NodeIterator" -> ../NodeIterator {?click, ?open}
+        @e187 li
+          @e188 a "NodeList" -> ../NodeList {?click, ?open}
+        @e189 li
+          @e190 a "ProcessingInstruction" -> ../ProcessingInstruction {?click, ?open}
+        @e191 li
+          @e192 a "QuotaExceededError" -> ../QuotaExceededError {?click, ?open}
+        @e193 li
+          @e194 a "Range" -> ../Range {?click, ?open}
+        @e195 li
+          @e196 a "ShadowRoot" -> ../ShadowRoot {?click, ?open}
+        @e197 li
+          @e198 a "StaticRange" -> ../StaticRange {?click, ?open}
+        @e199 li
+          @e200 a "Text" -> ../Text {?click, ?open}
+        @e201 li
+          @e202 a "TreeWalker" -> ../TreeWalker {?click, ?open}
+        @e203 li
+          @e204 a "XMLDocument" -> ../XMLDocument {?click, ?open}
+        @e205 li
+          @e206 a "XPathEvaluator" -> ../XPathEvaluator {?click, ?open}
+        @e207 li
+          @e208 a "XPathExpression" -> ../XPathExpression {?click, ?open}
+        @e209 li
+          @e210 a "XPathResult" -> ../XPathResult {?click, ?open}
+        @e211 li
+          @e212 a "XSLTProcessor" -> ../XSLTProcessor {?click, ?open}
+      @e213 p "This guide is about the objects and the actual things you can use to manipulate the DOM hierarchy. There are many points where understanding how these work can be confusing. For example, the object representing the HTML form element gets its name property from the HTMLFormElement interface but its className property from the HTMLElement interface. In both cases, the property you want is in that form object."
+      @e214 p "But the relationship between objects and the interfaces that they implement in the DOM can be confusing, and so this section attempts to say a little something about the actual interfaces in the DOM specification and how they are made available."
+    @e215 section "HTML DOM"
+      @e216 h2
+        @e217 a "HTML DOM" -> #html_dom {?click, ?open}
+      @e218 p
+        @e219 text "A document containing HTML is described using the"
+        @e220 a "Document" -> ../Document {?click, ?open}
+        @e221 text "interface, which is extended by the HTML specification to include various HTML-specific features. In particular, the"
+        @e222 a "Element" -> ../Element {?click, ?open}
+        @e223 text "interface is enhanced to become"
+        @e224 a "HTMLElement" -> ../HTMLElement {?click, ?open}
+        @e225 text "and various subclasses, each representing one of (or a family of closely related) elements."
+      @e226 p
+        @e227 text "The HTML DOM API provides access to various browser features such as tabs and windows, CSS styles and stylesheets, browser history, etc. These interfaces are discussed further in the"
+        @e228 a "HTML DOM API" -> ../HTML_DOM_API {?click, ?open}
+        @e229 text "documentation."
+    @e230 section "Specifications"
+      @e231 h2
+        @e232 a "Specifications" -> #specifications {?click, ?open}
+      @e233 table
+        @e234 thead
+          @e235 tr
+            @e236 th "Specification"
+        @e237 tbody
+          @e238 tr
+            @e239 td
+              @e240 a "DOM" -> https://dom.spec.whatwg.org/ {?click, ?open}
+    @e241 section "See also"
+      @e242 h2
+        @e243 a "See also" -> #see_also {?click, ?open}
+      @e244 ul
+        @e245 li
+          @e246 a "CSS Object Model (CSSOM)" -> ../CSS_Object_Model {?click, ?open}
+        @e247 li
+          @e248 a "HTML DOM API" -> ../HTML_DOM_API {?click, ?open}
+        @e249 li
+          @e250 a "SVG API" -> ../SVG_API {?click, ?open}

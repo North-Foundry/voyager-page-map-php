@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- Stable structural snapshot derived from https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model on 2026-07-14. --><html lang="en-US">
+<head><title>Document Object Model (DOM) - Web APIs | MDN</title></head>
+<body><main id="content" class="layout__content"><div class="layout__header reference-layout__header">
+
+
+            <mdn-survey></mdn-survey>
+            <h1>Document Object Model (DOM)</h1>
+             <section class="content-section">
+
+    <p>The <strong>Document Object Model</strong> (<strong>DOM</strong>) connects web pages to scripts or programming languages by representing the structure of a document—such as the HTML representing a web page—in memory. Usually it refers to JavaScript, even though modeling HTML, SVG, or XML documents as objects are not part of the core JavaScript language.</p>
+<p>The DOM represents a document with a logical tree. Each branch of the tree ends in a node, and each node contains objects. DOM methods allow programmatic access to the tree. With them, you can change the document's structure, style, or content.</p>
+<p>Nodes can also have event handlers attached to them. Once an event is triggered, the event handlers get executed.</p>
+  </section>
+          </div>
+<aside class="layout__right-sidebar reference-layout__toc">
+            <nav class="reference-toc">
+      <h2>In this article</h2>
+      <ul>
+        <li>
+              <a href="#concepts_and_usage" data-glean-id="toc_click: #concepts_and_usage">Concepts and usage</a>
+            </li>
+<li>
+              <a href="#dom_interfaces" data-glean-id="toc_click: #dom_interfaces">DOM interfaces</a>
+            </li>
+<li>
+              <a href="#html_dom" data-glean-id="toc_click: #html_dom">HTML DOM</a>
+            </li>
+<li>
+              <a href="#svg_dom" data-glean-id="toc_click: #svg_dom">SVG DOM</a>
+            </li>
+<li>
+              <a href="#examples" data-glean-id="toc_click: #examples">Examples</a>
+            </li>
+<li>
+              <a href="#specifications" data-glean-id="toc_click: #specifications">Specifications</a>
+            </li>
+<li>
+              <a href="#see_also" data-glean-id="toc_click: #see_also">See also</a>
+            </li>
+      </ul>
+    </nav>
+            <mdn-placement-sidebar></mdn-placement-sidebar>
+          </aside><div class="layout__body reference-layout__body">
+<section class="content-section" aria-labelledby="concepts_and_usage">
+    <!--lit-part pV7fc3t43jg=--><!--lit-node 0--><h2 id="concepts_and_usage" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#concepts_and_usage">Concepts and usage</a>
+</h2>
+<!--/lit-part-->
+    <p>The Document Object Model (DOM) is a programming interface for web documents.
+It represents the page so that programs can change the document structure, style, and content.
+The DOM represents the document as nodes and objects;
+that way, programming languages can interact with the page.</p>
+<p>A web page is a document that can be either displayed in the browser window or as the HTML source. In both cases, it is the same document but the Document Object Model (DOM) representation allows it to be manipulated. As an object-oriented representation of the web page, it can be modified with a scripting language such as JavaScript.</p>
+<p>For example, the DOM specifies that the <code>querySelectorAll</code> method in this code snippet must return a list of all the <a href="/en-US/docs/Web/HTML/Reference/Elements/p"><code>&lt;p&gt;</code></a> elements in the document:</p>
+<div class="code-example">
+<div class="example-header"><span class="language-name">js</span></div>
+<pre class="brush: js notranslate"><code>const paragraphs = document.querySelectorAll("p");
+// paragraphs[0] is the first &lt;p&gt; element
+// paragraphs[1] is the second &lt;p&gt; element, etc.
+alert(paragraphs[0].nodeName);
+</code></pre>
+</div>
+<p>All of the properties, methods, and events available for manipulating and creating web pages are organized into objects. For example, the <code>document</code> object that represents the document itself, any <code>table</code> objects that implement the <a href="/en-US/docs/Web/API/HTMLTableElement"><code>HTMLTableElement</code></a> DOM interface for accessing HTML tables, and so forth, are all objects.</p>
+<p>The DOM is built using multiple APIs that work together.
+The core DOM defines the entities
+describing any document and the objects within it.
+This is expanded upon as needed by other APIs that add new features and capabilities to the DOM.
+For example, the <a href="/en-US/docs/Web/API/HTML_DOM_API">HTML DOM API</a> adds support for representing HTML documents to the core DOM,
+and the SVG API adds support for representing SVG documents.</p>
+  </section><section class="content-section" aria-labelledby="what_is_a_dom_tree">
+    <!--lit-part u2nTZjbc1/Q=--><!--lit-node 0--><h3 id="what_is_a_dom_tree" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#what_is_a_dom_tree">What is a DOM tree?</a>
+</h3>
+<!--/lit-part-->
+    <p>A <strong>DOM tree</strong> is a <a href="https://en.wikipedia.org/wiki/Tree_structure" class="external" target="_blank" title="External link (opens in new tab)">tree structure</a> whose nodes represent an HTML or XML document's contents. Each HTML or XML document has a DOM tree representation. For example, consider the following document:</p>
+<div class="code-example">
+<div class="example-header"><span class="language-name">html</span></div>
+<pre class="brush: html notranslate"><code>&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Document&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Header&lt;/h1&gt;
+    &lt;p&gt;Paragraph&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+<p>It has a DOM tree that looks like this:</p>
+<p><img src="/en-US/docs/Web/API/Document_Object_Model/using_the_w3c_dom_level_1_core-doctree.jpg" alt="The DOM as a tree-like representation of a document that has a root and node elements containing content" width="290" height="190" loading="lazy"></p>
+<p>Although the above tree is similar to the above document's DOM tree, they're not identical, as the actual DOM tree preserves <a href="/en-US/docs/Web/CSS/Guides/Text/Whitespace">whitespace</a>.</p>
+<p>When a web browser parses an HTML document, it builds a DOM tree and then uses it to display the document.</p>
+  </section><section class="content-section" aria-labelledby="dom_and_javascript">
+    <!--lit-part o19GFD4B9dc=--><!--lit-node 0--><h3 id="dom_and_javascript" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#dom_and_javascript">DOM and JavaScript</a>
+</h3>
+<!--/lit-part-->
+    <p>The previous short example, like nearly all examples, is <a href="/en-US/docs/Glossary/JavaScript">JavaScript</a>. That is to say, it is <em>written</em> in JavaScript, but <em>uses</em> the DOM to access the document and its elements. The DOM is not a programming language, but without it, the JavaScript language wouldn't have any model or notion of web pages, HTML documents, SVG documents, and their component parts. The document as a whole, the head, tables within the document, table headers, text within the table cells, and all other elements in a document are parts of the document object model for that document. They can all be accessed and manipulated using the DOM and a scripting language like JavaScript.</p>
+<p>The DOM is not part of the JavaScript language,
+but is instead a Web API used to build websites.
+JavaScript can also be used in other contexts.
+For example, Node.js runs JavaScript programs on a computer,
+but provides a different set of APIs,
+and the DOM API is not a core part of the Node.js runtime.</p>
+<p>The DOM was designed to be independent of any particular programming language, making the structural representation of the document available from a single, consistent API.
+Even if most web developers will only use the DOM through JavaScript, implementations of the DOM can be built for any language, as this Python example demonstrates:</p>
+<div class="code-example">
+<div class="example-header"><span class="language-name">python</span></div>
+<pre class="brush: python notranslate"><code># Python DOM example
+import xml.dom.minidom as m
+doc = m.parse(r"C:\Projects\Py\chap1.xml")
+doc.nodeName # DOM property of document object
+p_list = doc.getElementsByTagName("para")
+</code></pre>
+</div>
+<p>For more information on what technologies are involved in writing JavaScript on the web, see <a href="/en-US/docs/Web/JavaScript/Reference/JavaScript_technologies_overview">JavaScript technologies overview</a>.</p>
+  </section><section class="content-section" aria-labelledby="accessing_the_dom">
+    <!--lit-part f7g10sfp9Cc=--><!--lit-node 0--><h3 id="accessing_the_dom" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#accessing_the_dom">Accessing the DOM</a>
+</h3>
+<!--/lit-part-->
+    <p>You don't have to do anything special to begin using the DOM.
+You use the API directly in JavaScript from within what is called a <em>script</em>, a program run by a browser.</p>
+<p>When you create a script, whether inline in a <code>&lt;script&gt;</code> element or included in the web page, you can immediately begin using the API for the <a href="/en-US/docs/Web/API/Document"><code>document</code></a> or <a href="/en-US/docs/Web/API/Window" title="window"><code>window</code></a> objects to manipulate the document itself, or any of the various elements in the web page (the descendant elements of the document). Your DOM programming may be something as simple as the following example, which displays a message on the console by using the <a href="/en-US/docs/Web/API/console/log_static" title="console.log()"><code>console.log()</code></a> function:</p>
+<div class="code-example">
+<div class="example-header"><span class="language-name">html</span></div>
+<pre class="brush: html notranslate"><code>&lt;body onload="console.log('Welcome to my home page!');"&gt;
+  …
+&lt;/body&gt;
+</code></pre>
+</div>
+<p>As it is generally not recommended to mix the structure of the page (written in HTML)
+and manipulation of the DOM (written in JavaScript),
+the JavaScript parts will be grouped together here,
+and separated from the HTML.</p>
+<p>For example, the following function creates a new <a href="/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements">h1</a> element,
+adds text to that element,
+and then adds it to the tree for the document:</p>
+<div class="code-example">
+<div class="example-header"><span class="language-name">html</span></div>
+<pre class="brush: html notranslate"><code>&lt;html lang="en"&gt;
+  &lt;head&gt; &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script&gt;
+      // create a couple of elements in an otherwise empty HTML page
+      const heading = document.createElement("h1");
+      const headingText = document.createTextNode("Big Head!");
+      heading.appendChild(headingText);
+      document.body.appendChild(heading);
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+  </section><section class="content-section" aria-labelledby="dom_interfaces">
+    <!--lit-part 4dCGgfJZOE8=--><!--lit-node 0--><h2 id="dom_interfaces" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#dom_interfaces">DOM interfaces</a>
+</h2>
+<!--/lit-part-->
+    <p>The following are all interfaces defined by the DOM specification:</p>
+<ul>
+<li><a href="/en-US/docs/Web/API/AbortController"><code>AbortController</code></a></li>
+<li><a href="/en-US/docs/Web/API/AbortSignal"><code>AbortSignal</code></a></li>
+<li><a href="/en-US/docs/Web/API/AbstractRange"><code>AbstractRange</code></a></li>
+<li><a href="/en-US/docs/Web/API/Attr"><code>Attr</code></a></li>
+<li><a href="/en-US/docs/Web/API/CDATASection"><code>CDATASection</code></a></li>
+<li><a href="/en-US/docs/Web/API/CharacterData"><code>CharacterData</code></a></li>
+<li><a href="/en-US/docs/Web/API/Comment"><code>Comment</code></a></li>
+<li><a href="/en-US/docs/Web/API/CustomEvent"><code>CustomEvent</code></a></li>
+<li><a href="/en-US/docs/Web/API/Document"><code>Document</code></a></li>
+<li><a href="/en-US/docs/Web/API/DocumentFragment"><code>DocumentFragment</code></a></li>
+<li><a href="/en-US/docs/Web/API/DocumentType"><code>DocumentType</code></a></li>
+<li>
+<a href="/en-US/docs/Web/API/DOMError"><code>DOMError</code></a> <span role="img" class="icon icon-deprecated" title="Deprecated. Not for use in new websites." aria-label="Deprecated"></span>
+</li>
+<li><a href="/en-US/docs/Web/API/DOMException"><code>DOMException</code></a></li>
+<li><a href="/en-US/docs/Web/API/DOMImplementation"><code>DOMImplementation</code></a></li>
+<li><a href="/en-US/docs/Web/API/DOMParser"><code>DOMParser</code></a></li>
+<li><a href="/en-US/docs/Web/API/DOMTokenList"><code>DOMTokenList</code></a></li>
+<li><a href="/en-US/docs/Web/API/Element"><code>Element</code></a></li>
+<li><a href="/en-US/docs/Web/API/Event"><code>Event</code></a></li>
+<li><a href="/en-US/docs/Web/API/EventTarget"><code>EventTarget</code></a></li>
+<li><a href="/en-US/docs/Web/API/HTMLCollection"><code>HTMLCollection</code></a></li>
+<li><a href="/en-US/docs/Web/API/MutationObserver"><code>MutationObserver</code></a></li>
+<li><a href="/en-US/docs/Web/API/MutationRecord"><code>MutationRecord</code></a></li>
+<li><a href="/en-US/docs/Web/API/NamedNodeMap"><code>NamedNodeMap</code></a></li>
+<li><a href="/en-US/docs/Web/API/Node"><code>Node</code></a></li>
+<li><a href="/en-US/docs/Web/API/NodeIterator"><code>NodeIterator</code></a></li>
+<li><a href="/en-US/docs/Web/API/NodeList"><code>NodeList</code></a></li>
+<li><a href="/en-US/docs/Web/API/ProcessingInstruction"><code>ProcessingInstruction</code></a></li>
+<li><a href="/en-US/docs/Web/API/QuotaExceededError"><code>QuotaExceededError</code></a></li>
+<li><a href="/en-US/docs/Web/API/Range"><code>Range</code></a></li>
+<li><a href="/en-US/docs/Web/API/ShadowRoot"><code>ShadowRoot</code></a></li>
+<li><a href="/en-US/docs/Web/API/StaticRange"><code>StaticRange</code></a></li>
+<li><a href="/en-US/docs/Web/API/Text"><code>Text</code></a></li>
+<li><a href="/en-US/docs/Web/API/TreeWalker"><code>TreeWalker</code></a></li>
+<li><a href="/en-US/docs/Web/API/XMLDocument"><code>XMLDocument</code></a></li>
+<li><a href="/en-US/docs/Web/API/XPathEvaluator"><code>XPathEvaluator</code></a></li>
+<li><a href="/en-US/docs/Web/API/XPathExpression"><code>XPathExpression</code></a></li>
+<li><a href="/en-US/docs/Web/API/XPathResult"><code>XPathResult</code></a></li>
+<li><a href="/en-US/docs/Web/API/XSLTProcessor"><code>XSLTProcessor</code></a></li>
+</ul>
+<p>This guide is about the objects and the actual <em>things</em> you can use to manipulate the DOM hierarchy. There are many points where understanding how these work can be confusing. For example, the object representing the HTML <code>form</code> element gets its <code>name</code> property from the <code>HTMLFormElement</code> interface but its <code>className</code> property from the <code>HTMLElement</code> interface. In both cases, the property you want is in that form object.</p>
+<p>But the relationship between objects and the interfaces that they implement in the DOM can be confusing, and so this section attempts to say a little something about the actual interfaces in the DOM specification and how they are made available.</p>
+  </section><section class="content-section" aria-labelledby="html_dom">
+    <!--lit-part qboz6zEyCSw=--><!--lit-node 0--><h2 id="html_dom" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#html_dom">HTML DOM</a>
+</h2>
+<!--/lit-part-->
+    <p>A document containing HTML is described using the <a href="/en-US/docs/Web/API/Document"><code>Document</code></a> interface, which is extended by the HTML specification to include various HTML-specific features. In particular, the <a href="/en-US/docs/Web/API/Element"><code>Element</code></a> interface is enhanced to become <a href="/en-US/docs/Web/API/HTMLElement"><code>HTMLElement</code></a> and various subclasses, each representing one of (or a family of closely related) elements.</p>
+<p>The HTML DOM API provides access to various browser features such as tabs and windows, CSS styles and stylesheets, browser history, etc. These interfaces are discussed further in the <a href="/en-US/docs/Web/API/HTML_DOM_API">HTML DOM API</a> documentation.</p>
+  </section><section class="content-section" aria-labelledby="specifications">
+    <!--lit-part s915xX5HiM4=--><!--lit-node 0--><h2 id="specifications" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#specifications">Specifications</a>
+</h2>
+<!--/lit-part-->
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">
+            Specification
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+              <td><a class="external" href="https://dom.spec.whatwg.org/" rel="noopener" target="_blank">DOM<!--?--></a></td>
+            </tr>
+      </tbody>
+    </table>
+  </section><section class="content-section" aria-labelledby="see_also">
+    <!--lit-part p88DAUaBJzA=--><!--lit-node 0--><h2 id="see_also" class="heading">
+<!--lit-node 1--><a class="heading-anchor" href="#see_also">See also</a>
+</h2>
+<!--/lit-part-->
+    <ul>
+<li><a href="/en-US/docs/Web/API/CSS_Object_Model">CSS Object Model (CSSOM)</a></li>
+<li><a href="/en-US/docs/Web/API/HTML_DOM_API">HTML DOM API</a></li>
+<li><a href="/en-US/docs/Web/API/SVG_API">SVG API</a></li>
+</ul>
+  </section>
+</div></main></body>
+</html>

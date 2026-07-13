@@ -1,0 +1,138 @@
+VPM/1
+title "Benefits - GOV.UK"
+url https://www.gov.uk/browse/benefits
+
+@e1 page [lang=en]
+  @e2 a "Skip to main content" -> #content {?click, ?open}
+  @e3 header
+    @e4 nav "Navigation menu"
+      @e5 a "Go to the GOV.UK homepage" -> ../../ {?click, ?open}
+      @e6 h2 "Navigation menu"
+      @e7 a "Menu" -> ../ {?click, ?open}
+      @e8 a "Search GOV.UK" -> ../../search {?click, ?open}
+  @e9 nav "Breadcrumb"
+    @e10 ol
+      @e11 li
+        @e12 a "Home" -> ../../ {?click, ?open}
+  @e13 main [lang=en]
+    @e14 header
+      @e15 h1 "Benefits"
+      @e16 p "Includes eligibility, appeals, tax credits and Universal Credit"
+    @e17 h2 "Most viewed"
+    @e18 ul
+      @e19 li
+        @e20 a "Sign in to your Universal Credit account" -> ../../sign-in-universal-credit {?click, ?open}
+      @e21 li
+        @e22 a "Universal Credit" -> ../../universal-credit {?click, ?open}
+      @e23 li
+        @e24 a "Sign in to your childcare account" -> ../../sign-in-childcare-account {?click, ?open}
+    @e25 h2 "Topics"
+    @e26 ul
+      @e27 li
+        @e28 h3
+          @e29 a "Manage an existing benefit, payment or claim" -> manage-your-benefit {?click, ?open}
+        @e30 p "Sign in to your account, report changes, find out about overpayments, or appeal a decision. Includes existing Universal Credit and tax credits claims."
+      @e31 li
+        @e32 h3
+          @e33 a "Benefits and financial support if you're looking for work" -> looking-for-work {?click, ?open}
+        @e34 p "Help if you're looking for a new job, are out of work or affected by redundancy. Includes Universal Credit and Jobseeker’s Allowance (JSA)."
+      @e35 li
+        @e36 h3
+          @e37 a "Benefits and financial support if you're temporarily unable to work" -> unable-to-work {?click, ?open}
+        @e38 p "Help if you’re unable to work because you’re ill or self-isolating. Includes Universal Credit and Employment and Support Allowance (ESA)."
+      @e39 li
+        @e40 h3
+          @e41 a "Benefits and financial support for families" -> families {?click, ?open}
+        @e42 p "Help if you look after children or plan to have or adopt a child. Includes Child Benefit."
+      @e43 li
+        @e44 h3
+          @e45 a "Benefits and financial support if you're disabled or have a health condition" -> disability {?click, ?open}
+        @e46 p "Help if you're living with a health condition or disability. Includes Employment and Support Allowance (ESA)."
+      @e47 li
+        @e48 h3
+          @e49 a "Benefits and financial support if you're caring for someone" -> help-for-carers {?click, ?open}
+        @e50 p "Help if you regularly spend time caring for someone. Includes Universal Credit."
+      @e51 li
+        @e52 h3
+          @e53 a "Benefits and financial support if you're on a low income" -> low-income {?click, ?open}
+        @e54 p "Help with heating, housing and other living costs. Includes Universal Credit."
+      @e55 li
+        @e56 h3
+          @e57 a "Benefits and financial support when someone dies" -> bereavement {?click, ?open}
+        @e58 p "Help with costs and funeral expenses after someone has died. Includes Universal Credit."
+  @e59 footer
+    @e60 h2 "Services and information"
+    @e61 ul
+      @e62 li
+        @e63 a "Benefits" -> . {?click, ?open}
+      @e64 li
+        @e65 a "Births, death, marriages and care" -> ../births-deaths-marriages {?click, ?open}
+      @e66 li
+        @e67 a "Business and self-employed" -> ../business {?click, ?open}
+      @e68 li
+        @e69 a "Childcare and parenting" -> ../childcare-parenting {?click, ?open}
+      @e70 li
+        @e71 a "Citizenship and living in the UK" -> ../citizenship {?click, ?open}
+      @e72 li
+        @e73 a "Crime, justice and the law" -> ../justice {?click, ?open}
+      @e74 li
+        @e75 a "Disabled people" -> ../disabilities {?click, ?open}
+      @e76 li
+        @e77 a "Driving and transport" -> ../driving {?click, ?open}
+      @e78 li
+        @e79 a "Education and learning" -> ../education {?click, ?open}
+      @e80 li
+        @e81 a "Employing people" -> ../employing-people {?click, ?open}
+      @e82 li
+        @e83 a "Environment and countryside" -> ../environment-countryside {?click, ?open}
+      @e84 li
+        @e85 a "Housing and local services" -> ../housing-local-services {?click, ?open}
+      @e86 li
+        @e87 a "Money and tax" -> ../tax {?click, ?open}
+      @e88 li
+        @e89 a "Passports, travel and living abroad" -> ../abroad {?click, ?open}
+      @e90 li
+        @e91 a "Visas and immigration" -> ../visas-immigration {?click, ?open}
+      @e92 li
+        @e93 a "Working, jobs and pensions" -> ../working {?click, ?open}
+    @e94 h2 "Government activity"
+    @e95 ul
+      @e96 li
+        @e97 a "Departments" -> ../../government/organisations {?click, ?open}
+      @e98 li
+        @e99 a "News" -> ../../search/news-and-communications {?click, ?open}
+      @e100 li
+        @e101 a "Guidance and regulation" -> ../../search/guidance-and-regulation {?click, ?open}
+      @e102 li
+        @e103 a "Research and statistics" -> ../../search/research-and-statistics {?click, ?open}
+      @e104 li
+        @e105 a "Policy papers and consultations" -> ../../search/policy-papers-and-consultations {?click, ?open}
+      @e106 li
+        @e107 a "Transparency" -> ../../search/transparency-and-freedom-of-information-releases {?click, ?open}
+      @e108 li
+        @e109 a "How government works" -> ../../government/how-government-works {?click, ?open}
+      @e110 li
+        @e111 a "Get involved" -> ../../government/get-involved {?click, ?open}
+    @e112 hr
+    @e113 h2 "Support links"
+    @e114 ul
+      @e115 li
+        @e116 a "Help" -> ../../help {?click, ?open}
+      @e117 li
+        @e118 a "Privacy" -> ../../help/privacy-notice {?click, ?open}
+      @e119 li
+        @e120 a "Cookies" -> ../../help/cookies {?click, ?open}
+      @e121 li
+        @e122 a "Accessibility statement" -> ../../help/accessibility-statement {?click, ?open}
+      @e123 li
+        @e124 a "Contact" -> ../../contact {?click, ?open}
+      @e125 li
+        @e126 a "Terms and conditions" -> ../../help/terms-conditions {?click, ?open}
+      @e127 li
+        @e128 a "Rhestr o Wasanaethau Cymraeg" -> ../../cymraeg [lang=cy] {?click, ?open}
+      @e129 li
+        @e130 a "Government Digital Service" -> ../../government/organisations/government-digital-service {?click, ?open}
+    @e131 text "All content is available under the"
+    @e132 a "Open Government Licence v3.0" -> https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/ {?click, ?open}
+    @e133 text ", except where otherwise stated"
+    @e134 a "© Crown copyright" -> https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/ {?click, ?open}
