@@ -1,0 +1,10 @@
+VPM/1
+title Login
+
+@e1 page [lang=it]
+  @e2 main
+    @e3 h1 "Accedi"
+    @e4 form "Login"
+      @e5 input "Email" [type=email, name=email, required, empty] {?fill, ?clear, ?focus}
+      @e6 input "Password" [type=password, name=password, required, secret, empty] {?fill, ?clear, ?focus}
+      @e7 button "Accedi" [type=submit] {?click, ?focus}

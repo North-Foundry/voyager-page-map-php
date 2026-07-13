@@ -1,0 +1,6 @@
+VPM/1
+
+@e1 page
+  @e2 main
+    @e3 h1 "Ciao mondo"
+    @e4 p "È già pronto"

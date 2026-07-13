@@ -1,0 +1,10 @@
+VPM/1
+
+@e1 page
+  @e2 form [action="/save", method=post]
+    @e3 input "Ricordami" [type=checkbox, unchecked] {?check, ?focus}
+    @e4 input [type=file, accept=".pdf", empty] {?upload, ?focus}
+    @e5 textarea "Note" [placeholder=Note, empty] {?fill, ?clear, ?focus}
+    @e6 select "country" [name=country] {?select, ?focus}
+      @e7 option "Seleziona" [value=""]
+      @e8 option "Italia" [value=IT, selected]

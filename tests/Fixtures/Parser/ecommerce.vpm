@@ -1,0 +1,16 @@
+VPM/1
+title "Voyager Store"
+url https://store.example.com/products
+
+@e1 page [lang=it]
+  @e2 header
+    @e3 nav "Principale"
+      @e4 a "Home" -> / {?click, ?open}
+      @e5 a "Prodotti" -> /products {?click, ?open}
+  @e6 main
+    @e7 h1 "Prodotti"
+    @e8 article
+      @e9 h2 "Voyager Keyboard"
+      @e10 p "Tastiera meccanica wireless"
+      @e11 p "€129,00"
+      @e12 button "Aggiungi al carrello" [type=button] {?click, ?focus}

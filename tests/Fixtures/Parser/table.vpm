@@ -1,0 +1,12 @@
+VPM/1
+
+@e1 page
+  @e2 table "Ordini"
+    @e3 thead
+      @e4 tr
+        @e5 th "Ordine"
+        @e6 th "Totale"
+    @e7 tbody
+      @e8 tr
+        @e9 td "ORD-1001"
+        @e10 td "€129,00"

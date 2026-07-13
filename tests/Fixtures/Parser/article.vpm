@@ -1,0 +1,7 @@
+VPM/1
+
+@e1 page
+  @e2 article
+    @e3 h1 "Guida"
+    @e4 p "Contenuto informativo."
+    @e5 img "Copertina" [alt=Copertina]
