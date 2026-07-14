@@ -6,6 +6,7 @@ namespace NorthFoundry\VoyagerPageMap\Document;
 
 use NorthFoundry\VoyagerPageMap\Contract\VoyagerPageMapElementInterface;
 use NorthFoundry\VoyagerPageMap\Element\PageElement;
+use NorthFoundry\VoyagerPageMap\Model\ElementReference;
 use NorthFoundry\VoyagerPageMap\Serialization\TextEscaper;
 
 /**
@@ -54,5 +55,26 @@ final readonly class VoyagerPageMapDocument
     public function findByReference(string $reference): ?VoyagerPageMapElementInterface
     {
         return $this->elementsByReference[$reference] ?? null;
+    }
+
+    /**
+     * Resolves the compact {@code e5} or textual {@code @e5} notation.
+     */
+    public function ref(string $reference): ?ElementReference
+    {
+        $reference = trim($reference);
+        if (preg_match('/^@?e([1-9]\d*)$/iD', $reference, $matches) !== 1) {
+            return null;
+        }
+
+        return $this->findByReference('@e' . $matches[1])?->reference();
+    }
+
+    /**
+     * Returns whether a compact or textual reference exists in this document.
+     */
+    public function hasRef(string $reference): bool
+    {
+        return $this->ref($reference) !== null;
     }
 }

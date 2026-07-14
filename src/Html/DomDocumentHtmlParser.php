@@ -33,6 +33,7 @@ use NorthFoundry\VoyagerPageMap\Element\TextareaElement;
 use NorthFoundry\VoyagerPageMap\Element\TextElement;
 use NorthFoundry\VoyagerPageMap\Exception\Html\HtmlParsingException;
 use NorthFoundry\VoyagerPageMap\Model\ElementReference;
+use NorthFoundry\VoyagerPageMap\Model\ElementSelector;
 
 /**
  * Converts one HTML source string into a VPM document through PHP's native DOM.
@@ -98,6 +99,9 @@ final class DomDocumentHtmlParser
 
     private int $reference = 0;
 
+    /** @var array<string, positive-int> Occurrence count for every non-empty DOM id. */
+    private array $idCounts = [];
+
     /**
      * Parses one source string and constructs a self-contained VPM document.
      *
@@ -116,6 +120,7 @@ final class DomDocumentHtmlParser
         $this->configuration = $configuration;
         $this->baseUrl = $baseUrl;
         $this->reference = 0;
+        $this->idCounts = $this->countIds();
 
         $title = $this->normalize($this->firstElementText('//title'));
         $language = $this->normalize($root->getAttribute('lang'));
@@ -124,8 +129,8 @@ final class DomDocumentHtmlParser
             $attributes['lang'] = $language;
         }
         // Allocate the page before descendants to preserve final preorder IDs.
-        $pageReference = $this->nextReference();
         $body = $this->firstElement('//body') ?? $root;
+        $pageReference = $this->nextReference($body);
 
         $page = new PageElement(
             $pageReference,
@@ -189,7 +194,7 @@ final class DomDocumentHtmlParser
         if ($node instanceof DOMText) {
             $text = $this->normalize($node->data);
 
-            return $text !== '' ? [new TextElement($this->nextReference(), $text)] : [];
+            return $text !== '' ? [new TextElement($this->nextReference($node), $text)] : [];
         }
         if (!$node instanceof DOMElement) {
             return [];
@@ -312,7 +317,7 @@ final class DomDocumentHtmlParser
             || ($contentMode === ElementContentMode::TextOrChildren && $this->hasStructuredDescendant($element));
         $usesContentName = $contentMode === ElementContentMode::Name
             || ($contentMode === ElementContentMode::TextOrChildren && !$retainsChildren);
-        $reference = $this->nextReference();
+        $reference = $this->nextReference($element);
 
         return new $class(
             reference: $reference,
@@ -724,10 +729,242 @@ final class DomDocumentHtmlParser
     }
 
     /**
-     * Allocates the next one-based VPM element reference.
+     * Counts source ids once so only genuinely unique ids become CSS anchors.
+     *
+     * @return array<string, positive-int>
      */
-    private function nextReference(): ElementReference
+    private function countIds(): array
     {
-        return new ElementReference(++$this->reference);
+        $counts = [];
+        $nodes = $this->xpath->query('//*[@id]');
+        if ($nodes === false) {
+            return $counts;
+        }
+        foreach ($nodes as $node) {
+            if (!$node instanceof DOMElement) {
+                continue;
+            }
+            $id = $node->getAttribute('id');
+            if ($id !== '') {
+                $counts[$id] = ($counts[$id] ?? 0) + 1;
+            }
+        }
+
+        return $counts;
+    }
+
+    /**
+     * Allocates the next one-based VPM reference together with its DOM selector.
+     */
+    private function nextReference(DOMNode $node): ElementReference
+    {
+        return new ElementReference(
+            ++$this->reference,
+            $node instanceof DOMElement
+                ? ElementSelector::css($this->cssSelector($node))
+                : ElementSelector::xpath($this->absoluteXPath($node)),
+        );
+    }
+
+    /**
+     * Builds a unique CSS selector, stopping at the closest unique id or at the
+     * HTML root. Promoted wrappers remain in the path because they still exist
+     * in the source DOM.
+     */
+    private function cssSelector(DOMElement $element): string
+    {
+        $segments = [];
+        $current = $element;
+
+        while (true) {
+            $id = $current->getAttribute('id');
+            if ($id !== '' && ($this->idCounts[$id] ?? 0) === 1) {
+                array_unshift($segments, '#' . $this->escapeCssIdentifier($id));
+                break;
+            }
+
+            array_unshift($segments, $this->cssPathSegment($current));
+            $parent = $current->parentNode;
+            if (!$parent instanceof DOMElement) {
+                break;
+            }
+            $current = $parent;
+        }
+
+        return implode(' > ', $segments);
+    }
+
+    /**
+     * Builds one class-aware CSS path segment and disambiguates equal sibling
+     * candidates using their one-based position amongst elements of that tag.
+     */
+    private function cssPathSegment(DOMElement $element): string
+    {
+        $tag = strtolower($element->tagName);
+        $classes = $this->classTokens($element);
+        $segment = $this->escapeCssIdentifier($tag);
+        foreach ($classes as $class) {
+            $segment .= '.' . $this->escapeCssIdentifier($class);
+        }
+
+        $matchingSiblings = 0;
+        $typePosition = 0;
+        $parent = $element->parentNode;
+        if ($parent !== null) {
+            foreach ($parent->childNodes as $sibling) {
+                if (!$sibling instanceof DOMElement || strtolower($sibling->tagName) !== $tag) {
+                    continue;
+                }
+                if ($sibling === $element) {
+                    $typePosition = $this->elementTypePosition($element);
+                }
+                if ($this->containsClasses($sibling, $classes)) {
+                    ++$matchingSiblings;
+                }
+            }
+        }
+        if ($matchingSiblings > 1) {
+            $segment .= ':nth-of-type(' . $typePosition . ')';
+        }
+
+        return $segment;
+    }
+
+    /** @return list<string> */
+    private function classTokens(DOMElement $element): array
+    {
+        $class = trim($element->getAttribute('class'));
+        if ($class === '') {
+            return [];
+        }
+
+        $tokens = preg_split('/\s+/u', $class) ?: [];
+
+        return array_values(array_unique($tokens));
+    }
+
+    /** @param list<string> $classes */
+    private function containsClasses(DOMElement $element, array $classes): bool
+    {
+        if ($classes === []) {
+            return true;
+        }
+        $available = array_flip($this->classTokens($element));
+        foreach ($classes as $class) {
+            if (!isset($available[$class])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Returns an element's one-based :nth-of-type position.
+     */
+    private function elementTypePosition(DOMElement $element): int
+    {
+        $position = 0;
+        $tag = strtolower($element->tagName);
+        $parent = $element->parentNode;
+        if ($parent === null) {
+            return 1;
+        }
+        foreach ($parent->childNodes as $sibling) {
+            if ($sibling instanceof DOMElement && strtolower($sibling->tagName) === $tag) {
+                ++$position;
+            }
+            if ($sibling === $element) {
+                return $position;
+            }
+        }
+
+        return 1;
+    }
+
+    /**
+     * Escapes an id, class, or tag according to the CSS identifier algorithm.
+     */
+    private function escapeCssIdentifier(string $identifier): string
+    {
+        $characters = preg_split('//u', $identifier, -1, \PREG_SPLIT_NO_EMPTY);
+        if ($characters === false) {
+            $characters = str_split($identifier);
+        }
+        $result = '';
+        $length = count($characters);
+        foreach ($characters as $index => $character) {
+            $isAscii = strlen($character) === 1;
+            $code = $isAscii ? ord($character) : 128;
+
+            if ($code === 0) {
+                $result .= "\u{FFFD}";
+                continue;
+            }
+            if ($code <= 31 || $code === 127
+                || ($index === 0 && $code >= 48 && $code <= 57)
+                || ($index === 1 && $code >= 48 && $code <= 57 && $characters[0] === '-')) {
+                $result .= '\\' . dechex($code) . ' ';
+                continue;
+            }
+            if ($index === 0 && $character === '-' && $length === 1) {
+                $result .= '\\-';
+                continue;
+            }
+            if (!$isAscii || preg_match('/[A-Za-z0-9_-]/D', $character) === 1) {
+                $result .= $character;
+                continue;
+            }
+            $result .= '\\' . $character;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Builds an absolute XPath for nodes such as DOM text nodes that CSS cannot
+     * address directly.
+     */
+    private function absoluteXPath(DOMNode $node): string
+    {
+        $segments = [];
+        $current = $node;
+
+        while ($current instanceof DOMElement || $current instanceof DOMText) {
+            if ($current instanceof DOMText) {
+                $segments[] = 'text()[' . $this->nodeTypePosition($current) . ']';
+            } else {
+                $tag = strtolower($current->tagName);
+                $step = preg_match('/^[A-Za-z_][A-Za-z0-9._-]*$/D', $tag) === 1
+                    ? $tag
+                    : '*[local-name()=' . $this->xpathLiteral($tag) . ']';
+                $segments[] = $step . '[' . $this->elementTypePosition($current) . ']';
+            }
+            $current = $current->parentNode;
+        }
+
+        return '/' . implode('/', array_reverse($segments));
+    }
+
+    /**
+     * Returns a node's one-based position amongst siblings of the same DOM type.
+     */
+    private function nodeTypePosition(DOMNode $node): int
+    {
+        $position = 0;
+        $parent = $node->parentNode;
+        if ($parent === null) {
+            return 1;
+        }
+        foreach ($parent->childNodes as $sibling) {
+            if ($sibling::class === $node::class) {
+                ++$position;
+            }
+            if ($sibling === $node) {
+                return $position;
+            }
+        }
+
+        return 1;
     }
 }

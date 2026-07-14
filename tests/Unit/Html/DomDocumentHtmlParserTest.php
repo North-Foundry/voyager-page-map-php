@@ -7,6 +7,7 @@ namespace NorthFoundry\VoyagerPageMap\Tests\Unit\Html;
 use NorthFoundry\VoyagerPageMap\Configuration\VoyagerPageMapConfiguration;
 use NorthFoundry\VoyagerPageMap\Exception\Html\HtmlParsingException;
 use NorthFoundry\VoyagerPageMap\Html\DomDocumentHtmlParser;
+use NorthFoundry\VoyagerPageMap\Model\ElementSelectorType;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -132,6 +133,55 @@ final class DomDocumentHtmlParserTest extends TestCase
         self::assertStringContainsString('input "Email" [type=email, empty]', $text);
         self::assertSame(1, substr_count($text, '"Email"'));
         self::assertStringContainsString('textarea "Bio" [value="Testo già presente", filled]', $text);
+    }
+
+    public function testReferencesKeepUniqueSelectorsForIdsClassesAndTextNodes(): void
+    {
+        $document = (new DomDocumentHtmlParser())->parse(
+            <<<'HTML'
+                <body id="app">
+                    <main>
+                        <div class="panel">
+                            <button class="action">One</button>
+                            <button class="action">Two</button>
+                            <a id="profile" href="/me">Profile</a>
+                        </div>
+                        Before <button>Go</button> After
+                    </main>
+                </body>
+                HTML,
+            null,
+            VoyagerPageMapConfiguration::default(),
+        );
+
+        $pageSelector = $document->ref('@e1')?->selector;
+        self::assertNotNull($pageSelector);
+        self::assertSame(ElementSelectorType::Css, $pageSelector->type);
+        self::assertSame('#app', $pageSelector->value);
+        self::assertSame('#app > main', $document->ref('@e2')?->selector?->value);
+        self::assertSame('#app > main > div.panel > button.action:nth-of-type(1)', $document->ref('@e3')?->selector?->value);
+        self::assertSame('#app > main > div.panel > button.action:nth-of-type(2)', $document->ref('@e4')?->selector?->value);
+        self::assertSame('#profile', $document->ref('@e5')?->selector?->value);
+        $textSelector = $document->ref('@e6')?->selector;
+        self::assertNotNull($textSelector);
+        self::assertSame(ElementSelectorType::XPath, $textSelector->type);
+        self::assertSame('/html[1]/body[1]/main[1]/text()[2]', $textSelector->value);
+        self::assertSame('#app > main > button', $document->ref('@e7')?->selector?->value);
+        self::assertSame('/html[1]/body[1]/main[1]/text()[3]', $document->ref('@e8')?->selector?->value);
+        self::assertNull($document->ref('@e9'));
+    }
+
+    public function testDuplicateIdsFallBackToStructuralSelectorsAndCssIdentifiersAreEscaped(): void
+    {
+        $document = (new DomDocumentHtmlParser())->parse(
+            '<main><button id="duplicate">One</button><button id="duplicate">Two</button><a id="123:profile" href="/">Profile</a></main>',
+            null,
+            VoyagerPageMapConfiguration::default(),
+        );
+
+        self::assertSame('html > body > main > button:nth-of-type(1)', $document->ref('@e3')?->cssSelector());
+        self::assertSame('html > body > main > button:nth-of-type(2)', $document->ref('@e4')?->cssSelector());
+        self::assertSame('#\\31 23\\:profile', $document->ref('@e5')?->cssSelector());
     }
 
     public function testQuotedLabelIdsAreSafeInXPathQueries(): void
