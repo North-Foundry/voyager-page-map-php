@@ -44,7 +44,11 @@ final class ElementSerializationTest extends TestCase
             'heading' => [new HeadingElement(new ElementReference(4), 'Title', sourceTag: 'h2'), '@e4 h2 "Title"'],
             'select' => [new SelectElement(new ElementReference(6), 'Country', ['name' => 'country']), '@e6 select "Country" [name=country] {?select, ?focus}'],
             'option' => [new OptionElement(new ElementReference(7), 'Italy', ['value' => 'IT', 'selected' => '']), '@e7 option "Italy" [value=IT, selected]'],
-            'image' => [new ImageElement(new ElementReference(8), 'Logo', ['src' => '/logo.png', 'alt' => 'Logo']), '@e8 img "Logo" [alt=Logo]'],
+            'image' => [new ImageElement(new ElementReference(8), 'Logo', ['src' => '/logo.png', 'alt' => 'Logo']), '@e8 img "Logo" -> /logo.png [alt=Logo]'],
+            'responsive image' => [
+                new ImageElement(new ElementReference(8), 'Logo', ['src' => '/logo.png', 'srcset' => '/logo-480.png 480w, /logo-960.png 960w', 'alt' => 'Logo']),
+                "@e8 img \"Logo\" -> {\n  src -> /logo.png\n  480w -> /logo-480.png\n  960w -> /logo-960.png\n} [alt=Logo]",
+            ],
             'list' => [new GenericElement(new ElementReference(9), sourceTag: 'ol'), '@e9 ol'],
             'table' => [new GenericElement(new ElementReference(10), 'Orders', sourceTag: 'table'), '@e10 table "Orders"'],
             'text' => [new TextElement(new ElementReference(11), 'Information'), '@e11 text "Information"'],

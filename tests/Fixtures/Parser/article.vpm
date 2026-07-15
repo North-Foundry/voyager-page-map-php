@@ -4,4 +4,4 @@ VPM/1
   @e2 article
     @e3 h1 "Guida"
     @e4 p "Contenuto informativo."
-    @e5 img "Copertina" [alt=Copertina]
+    @e5 img "Copertina" -> cover.png [alt=Copertina]

@@ -147,7 +147,8 @@ Selectors address the DOM from which that VPM document was created. Voyager Page
 - `[...]` contains semantic properties and static state.
 - `{...}` contains actions inferred from the markup.
 - `?fill` means that `fill` is possible but has not been runtime-verified; `!action` marks an action blocked by declared state.
-- `-> /path` identifies a navigation destination.
+- `-> /path` identifies a navigation destination or a single image resource.
+- `-> { ... }` on an `img` groups its fallback `src` and `srcset` candidates; the keys are `src`, `480w`, `2x`, and similar source descriptors.
 
 References are contiguous and deterministic for the same HTML and configuration. They are local to one VPM document and should not be treated as persistent IDs across page changes.
 

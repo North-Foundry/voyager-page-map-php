@@ -47,7 +47,7 @@ Metadata fields are omitted when their value is unavailable or empty. `title` an
 
 ## Element line grammar
 
-Each element occupies one line with the following ordered fields:
+Each element occupies one line, except an image with a `srcset`, whose resource set spans multiple lines. Fields retain this order:
 
 ```text
 <indent><reference> <tag> <name?> <destination?> <properties?> <actions?>
@@ -58,9 +58,17 @@ An informal grammar is:
 ```text
 element      = indent, reference, SP, tag,
                [SP, quoted-name],
-               [SP, "->", SP, token],
+               [destination],
                [SP, properties],
                [SP, actions] ;
+
+destination  = SP, "->", SP, token
+             | SP, "->", SP, resource-set ;
+resource-set = "{", LF,
+               {resource-line, LF},
+               indent, "}" ;
+resource-line = indent, "  ", resource-key, SP, "->", SP, token ;
+resource-key = token ;
 
 reference    = "@e", positive-integer ;
 properties   = "[", property, {", ", property}, "]" ;
@@ -72,7 +80,7 @@ indent       = {"  "} ;
 SP           = " " ;
 ```
 
-Optional fields MUST be omitted completely when empty. A serializer MUST NOT leave placeholder delimiters such as `[]` or `{}`.
+Optional properties and actions MUST be omitted completely when empty. A serializer MUST NOT leave empty property or action delimiters such as `[]` or `{}`. An empty resource set is permitted only when the source declares an empty `srcset`.
 
 ## References
 
@@ -184,6 +192,26 @@ An element with a serialized navigation destination places it after the readable
 The destination is distinct from the property block. An `href` is therefore not repeated as a source property unless source-attribute configuration explicitly includes it.
 
 VPM/1 permits absolute URLs, protocol-relative URLs, root-relative paths, relative paths, query references, fragments, and the empty current-document reference. URL normalization is a producer concern rather than part of the text grammar.
+
+## Image resources
+
+An `img` with a `src` and no `srcset` serializes its single resource as a direct destination:
+
+```text
+@e2 img "Logo" -> /assets/logo.svg [alt=Logo]
+```
+
+The presence of `srcset` always selects the resource-set form, including when it has only one candidate. The optional fallback `src` is emitted first as `src`; each remaining key is its source-set descriptor, such as `480w` or `2x`:
+
+```text
+@e2 img "Scarpa rossa" -> {
+  src -> /images/scarpa.jpg
+  480w -> /images/scarpa-480.jpg
+  960w -> /images/scarpa-960.jpg
+} [alt="Scarpa rossa"]
+```
+
+Resource lines are not DOM children and do not receive `@eN` references. A consumer can identify the construct unambiguously because the opening `{` directly follows `->`; an action set never does.
 
 ## Properties
 

@@ -34,6 +34,7 @@ use NorthFoundry\VoyagerPageMap\Element\TextElement;
 use NorthFoundry\VoyagerPageMap\Exception\Html\HtmlParsingException;
 use NorthFoundry\VoyagerPageMap\Model\ElementReference;
 use NorthFoundry\VoyagerPageMap\Model\ElementSelector;
+use NorthFoundry\VoyagerPageMap\Model\ImageSourceSet;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 
 /**
@@ -325,6 +326,13 @@ final class DomDocumentHtmlParser
             if (isset($attributes[$url])) {
                 $attributes[$url] = $this->resolveUrl($attributes[$url]);
             }
+        }
+        if ($this->configuration->resolveRelativeUrls && isset($attributes['srcset'])) {
+            $candidates = ImageSourceSet::parse($attributes['srcset']);
+            foreach ($candidates as $index => $candidate) {
+                $candidates[$index]['url'] = $this->resolveUrl($candidate['url']);
+            }
+            $attributes['srcset'] = ImageSourceSet::serialize($candidates);
         }
         $class = self::REGISTRY[$tag] ?? GenericElement::class;
         $contentMode = $class::contentMode($attributes);

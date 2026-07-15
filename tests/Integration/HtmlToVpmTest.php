@@ -163,6 +163,29 @@ final class HtmlToVpmTest extends TestCase
         self::assertStringContainsString('button "Salva"', $button->toText());
     }
 
+    public function testImageResourcesUseDirectAndGroupedDestinationSyntax(): void
+    {
+        $direct = VoyagerPageMap::fromHtml('<img src="/assets/logo.svg" alt="Logo">');
+        $responsive = VoyagerPageMap::fromHtml('<img src="/images/shoe.jpg" srcset="/images/shoe-480.jpg 480w, /images/shoe-960.jpg 960w" alt="Scarpa rossa">');
+        $singleCandidate = VoyagerPageMap::fromHtml('<img srcset="/images/banner@2x.jpg 2x" alt="Banner">');
+        $resolved = VoyagerPageMap::fromHtml(
+            '<img src="/images/shoe.jpg" srcset="/images/shoe-480.jpg 480w, https://cdn.example.com/shoe-960.jpg 960w" alt="Scarpa">',
+            'https://example.com/products/shoe',
+            VoyagerPageMapConfiguration::agent()->withRelativeUrlResolution(),
+        );
+
+        self::assertSame("VPM/1\n\n@e1 page\n  @e2 img \"Logo\" -> /assets/logo.svg [alt=Logo]\n", $direct->toText());
+        self::assertSame(
+            "VPM/1\n\n@e1 page\n  @e2 img \"Scarpa rossa\" -> {\n    src -> /images/shoe.jpg\n    480w -> /images/shoe-480.jpg\n    960w -> /images/shoe-960.jpg\n  } [alt=\"Scarpa rossa\"]\n",
+            $responsive->toText(),
+        );
+        self::assertSame("VPM/1\n\n@e1 page\n  @e2 img \"Banner\" -> {\n    2x -> /images/banner@2x.jpg\n  } [alt=Banner]\n", $singleCandidate->toText());
+        self::assertSame(
+            "VPM/1\nurl https://example.com/products/shoe\n\n@e1 page\n  @e2 img \"Scarpa\" -> {\n    src -> ../../images/shoe.jpg\n    480w -> ../../images/shoe-480.jpg\n    960w -> https://cdn.example.com/shoe-960.jpg\n  } [alt=Scarpa]\n",
+            $resolved->toText(),
+        );
+    }
+
     public function testWrappingLabelIsConsumedWithoutDuplicatingItsText(): void
     {
         $vpm = VoyagerPageMap::fromHtml('<label>Email <input type="email"></label>');
@@ -198,7 +221,7 @@ final class HtmlToVpmTest extends TestCase
 
         self::assertStringContainsString('-> ../../account', $vpm->toText());
         self::assertStringContainsString('-> ?page=2', $vpm->toText());
-        self::assertStringContainsString('src="//cdn.example.com/a.png"', $vpm->toText());
+        self::assertStringContainsString('img "A" -> //cdn.example.com/a.png', $vpm->toText());
         self::assertStringNotContainsString('href=', $vpm->toText());
 
         $withHref = VoyagerPageMap::fromHtml(

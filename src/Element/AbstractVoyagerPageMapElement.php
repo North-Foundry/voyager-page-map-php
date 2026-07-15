@@ -90,9 +90,9 @@ abstract class AbstractVoyagerPageMapElement implements VoyagerPageMapElementInt
         if ($this->name !== null && $this->name !== '') {
             $line .= ' ' . TextEscaper::quoted($this->name);
         }
-        $destination = $this->destination();
+        $destination = $this->serializedDestination($context);
         if ($destination !== null) {
-            $line .= ' -> ' . TextEscaper::token($destination);
+            $line .= $destination;
         }
         $attributes = $this->serializedAttributes();
         if ($attributes->count() > 0) {
@@ -164,6 +164,19 @@ abstract class AbstractVoyagerPageMapElement implements VoyagerPageMapElementInt
         return $this->has('href') ? $this->value('href') : null;
     }
 
+    /**
+     * Serializes the element's destination or resource set after its name.
+     *
+     * Most elements expose one URL. Elements with a structured resource set,
+     * such as responsive images, can override this to emit a multiline block.
+     */
+    protected function serializedDestination(SerializationContext $context): ?string
+    {
+        $destination = $this->destination();
+
+        return $destination === null ? null : ' -> ' . TextEscaper::token($destination);
+    }
+
     protected function disabled(): bool
     {
         return $this->has('disabled') || $this->value('aria-disabled') === 'true';
@@ -213,7 +226,12 @@ abstract class AbstractVoyagerPageMapElement implements VoyagerPageMapElementInt
                 $emitted[$attribute->name] = true;
             }
             foreach ($this->rawAttributes as $name => $value) {
-                if (isset($emitted[$name]) || $this->isProtectedAttribute($name) || ($allowedAttributes !== null && !isset($allowedAttributes[$name]))) {
+                if (
+                    isset($emitted[$name])
+                    || in_array($name, $this->excludedSourceAttributes(), true)
+                    || $this->isProtectedAttribute($name)
+                    || ($allowedAttributes !== null && !isset($allowedAttributes[$name]))
+                ) {
                     continue;
                 }
                 $attributes->add($name, $value);
@@ -231,6 +249,14 @@ abstract class AbstractVoyagerPageMapElement implements VoyagerPageMapElementInt
         return $this->serializedTag() === 'input'
             && strtolower($this->value('type') ?? 'text') === 'password'
             && $name === 'value';
+    }
+
+    /**
+     * @return list<string>
+     */
+    protected function excludedSourceAttributes(): array
+    {
+        return [];
     }
 
     protected function focusAction(ElementActionCollection $actions): void
