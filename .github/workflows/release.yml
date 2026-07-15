@@ -31,6 +31,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
       - name: Require the main branch
         run: test "$GITHUB_REF" = refs/heads/main
 
