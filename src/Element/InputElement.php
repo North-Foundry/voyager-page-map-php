@@ -83,8 +83,11 @@ final class InputElement extends AbstractVoyagerPageMapElement
             return $a;
         }
         if ($type !== 'hidden') {
-            $a->add('fill', $state);
-            $a->add('clear', $state);
+            $editState = $this->has('readonly') || $this->value('aria-readonly') === 'true'
+                ? ActionAvailability::Blocked
+                : $state;
+            $a->add('fill', $editState);
+            $a->add('clear', $editState);
             $a->add('focus', $state);
         }
         return $a;

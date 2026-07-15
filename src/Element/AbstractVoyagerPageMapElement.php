@@ -10,7 +10,6 @@ use NorthFoundry\VoyagerPageMap\Model\ElementActionCollection;
 use NorthFoundry\VoyagerPageMap\Model\ElementAttributeCollection;
 use NorthFoundry\VoyagerPageMap\Model\ElementCollection;
 use NorthFoundry\VoyagerPageMap\Model\ElementReference;
-use NorthFoundry\VoyagerPageMap\Model\RuntimeState;
 use NorthFoundry\VoyagerPageMap\Serialization\SerializationContext;
 use NorthFoundry\VoyagerPageMap\Serialization\TextEscaper;
 
@@ -31,7 +30,6 @@ abstract class AbstractVoyagerPageMapElement implements VoyagerPageMapElementInt
         private readonly ElementReference $reference,
         private readonly ?string $name = null,
         protected readonly array $rawAttributes = [],
-        protected readonly RuntimeState $runtimeState = new RuntimeState(),
         private readonly ?string $sourceTag = null,
         private readonly bool|array $includedSourceAttributes = false,
         private readonly ?string $content = null,
