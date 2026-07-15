@@ -256,4 +256,11 @@ final class HtmlToVpmTest extends TestCase
         $text = VoyagerPageMap::fromHtml('<main>Always present</main>', configuration: VoyagerPageMapConfiguration::compact());
         self::assertStringContainsString('text "Always present"', $text->toText());
     }
+
+    public function testReadonlyFieldsBlockEditingActions(): void
+    {
+        $text = VoyagerPageMap::fromHtml('<input aria-label="Code" readonly>')->toText();
+
+        self::assertStringContainsString('{!fill, !clear, ?focus}', $text);
+    }
 }
