@@ -156,7 +156,8 @@ use NorthFoundry\VoyagerPageMap\Configuration\VoyagerPageMapConfiguration;
 
 $configuration = VoyagerPageMapConfiguration::agent()
     ->withRelativeUrlResolution()
-    ->withAttributes(['id', 'data-tracking']);
+    ->withAttributes(['id', 'data-tracking'])
+    ->withIgnoredSelectors(['.cookie-banner', '[data-testid="advertisement"]']);
 
 $pageMap = VoyagerPageMap::fromHtml(
     $html,
@@ -177,6 +178,9 @@ Available modifiers:
 - `withGenericContainers()` retains otherwise-promoted `div` and `span` elements.
 - `withAttributes()` includes all or selected source attributes.
 - `withRelativeUrlResolution()` compacts same-origin URLs relative to `baseUrl`.
+- `withIgnoredSelectors()` excludes every subtree matching one of the supplied CSS selectors.
+
+Ignored selectors are evaluated against the parsed source DOM before references are allocated, so removed nodes do not leave gaps in `@eN` numbering. A matching element and all its descendants are excluded. Invalid selectors and browser-state selectors that cannot be evaluated against static HTML are rejected with an `InvalidArgumentException`.
 
 `VPM`, `VPMConfiguration`, and `VPMDocument` are shorter aliases for the canonical class names.
 

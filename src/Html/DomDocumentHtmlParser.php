@@ -34,6 +34,7 @@ use NorthFoundry\VoyagerPageMap\Element\TextElement;
 use NorthFoundry\VoyagerPageMap\Exception\Html\HtmlParsingException;
 use NorthFoundry\VoyagerPageMap\Model\ElementReference;
 use NorthFoundry\VoyagerPageMap\Model\ElementSelector;
+use Symfony\Component\CssSelector\CssSelectorConverter;
 
 /**
  * Converts one HTML source string into a VPM document through PHP's native DOM.
@@ -102,6 +103,9 @@ final class DomDocumentHtmlParser
     /** @var array<string, positive-int> Occurrence count for every non-empty DOM id. */
     private array $idCounts = [];
 
+    /** @var array<string, true> Absolute DOM paths selected for subtree exclusion. */
+    private array $ignoredElementPaths = [];
+
     /**
      * Parses one source string and constructs a self-contained VPM document.
      *
@@ -121,6 +125,7 @@ final class DomDocumentHtmlParser
         $this->baseUrl = $baseUrl;
         $this->reference = 0;
         $this->idCounts = $this->countIds();
+        $this->ignoredElementPaths = $this->collectIgnoredElementPaths($configuration->ignoredSelectors);
 
         $title = $this->normalize($this->firstElementText('//title'));
         $language = $this->normalize($root->getAttribute('lang'));
@@ -135,7 +140,7 @@ final class DomDocumentHtmlParser
         $page = new PageElement(
             $pageReference,
             rawAttributes: $attributes,
-            children: $this->buildChildren($body),
+            children: $this->isIgnoredBySelector($body) ? [] : $this->buildChildren($body),
         );
 
         return new VoyagerPageMapDocument(
@@ -191,6 +196,10 @@ final class DomDocumentHtmlParser
      */
     private function buildNode(DOMNode $node): array
     {
+        if ($this->isIgnoredBySelector($node)) {
+            return [];
+        }
+
         if ($node instanceof DOMText) {
             $text = $this->normalize($node->data);
 
@@ -233,6 +242,9 @@ final class DomDocumentHtmlParser
         $walk = function (DOMNode $parent) use (&$result, &$walk): void {
             foreach ($parent->childNodes as $child) {
                 if (!$child instanceof DOMElement) {
+                    continue;
+                }
+                if ($this->isIgnoredBySelector($child)) {
                     continue;
                 }
                 if (in_array(strtolower($child->tagName), self::LABELABLE_TAGS, true)) {
@@ -291,6 +303,9 @@ final class DomDocumentHtmlParser
             if (!$child instanceof DOMElement) {
                 continue;
             }
+            if ($this->isIgnoredBySelector($child)) {
+                continue;
+            }
             if (in_array(strtolower($child->tagName), self::LABELABLE_TAGS, true) || $this->containsFormControl($child)) {
                 return true;
             }
@@ -325,7 +340,7 @@ final class DomDocumentHtmlParser
             rawAttributes: $attributes,
             sourceTag: $tag,
             includedSourceAttributes: $this->configuration->includeAttributes,
-            content: $tag === 'textarea' ? $this->normalize($element->textContent) : null,
+            content: $tag === 'textarea' ? $this->readableText($element) : null,
             children: $retainsChildren ? $this->buildChildren($element) : [],
         );
     }
@@ -337,6 +352,9 @@ final class DomDocumentHtmlParser
     {
         foreach ($element->childNodes as $child) {
             if (!$child instanceof DOMElement) {
+                continue;
+            }
+            if ($this->isIgnoredBySelector($child)) {
                 continue;
             }
             $tag = strtolower($child->tagName);
@@ -473,7 +491,7 @@ final class DomDocumentHtmlParser
     {
         $parts = [];
         $walk = function (DOMNode $current) use (&$parts, &$walk, $excludedNode): void {
-            if ($current === $excludedNode) {
+            if ($current === $excludedNode || $this->isIgnoredBySelector($current)) {
                 return;
             }
             if ($current instanceof DOMElement && in_array(strtolower($current->tagName), ['script', 'style', 'noscript'], true)) {
@@ -698,7 +716,9 @@ final class DomDocumentHtmlParser
      */
     private function firstElementText(string $query): ?string
     {
-        return $this->firstElement($query)?->textContent;
+        $element = $this->firstElement($query);
+
+        return $element === null ? null : $this->readableText($element);
     }
 
     /**
@@ -751,6 +771,52 @@ final class DomDocumentHtmlParser
         }
 
         return $counts;
+    }
+
+    /**
+     * Resolves configured CSS selectors once and records every matching DOM path.
+     *
+     * @param list<string> $selectors
+     * @return array<string, true>
+     */
+    private function collectIgnoredElementPaths(array $selectors): array
+    {
+        $paths = [];
+        $converter = new CssSelectorConverter();
+        foreach ($selectors as $selector) {
+            $nodes = $this->xpath->query($converter->toXPath($selector));
+            if ($nodes === false) {
+                continue;
+            }
+            foreach ($nodes as $node) {
+                if (!$node instanceof DOMElement) {
+                    continue;
+                }
+                $path = $node->getNodePath();
+                if ($path !== null) {
+                    $paths[$path] = true;
+                }
+            }
+        }
+
+        return $paths;
+    }
+
+    /**
+     * Returns whether the node itself or one of its DOM ancestors was selected for exclusion.
+     */
+    private function isIgnoredBySelector(DOMNode $node): bool
+    {
+        $current = $node instanceof DOMElement ? $node : $node->parentNode;
+        while ($current instanceof DOMElement) {
+            $path = $current->getNodePath();
+            if ($path !== null && isset($this->ignoredElementPaths[$path])) {
+                return true;
+            }
+            $current = $current->parentNode;
+        }
+
+        return false;
     }
 
     /**

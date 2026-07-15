@@ -102,6 +102,50 @@ final class DomDocumentHtmlParserTest extends TestCase
         self::assertNull($document->findByReference('@e3'));
     }
 
+    public function testConfiguredCssSelectorsExcludeMatchingSubtreesBeforeReferencesAreAllocated(): void
+    {
+        $html = <<<'HTML'
+            <main>
+                <div class="noise"><button>Ignore subtree</button></div>
+                <section data-kind="content">
+                    <p class="noise">Ignore paragraph</p>
+                    <button>Keep</button>
+                </section>
+            </main>
+            HTML;
+        $configuration = VoyagerPageMapConfiguration::agent()->withIgnoredSelectors([
+            '.noise',
+            '[data-kind="content"] > p',
+        ]);
+
+        $document = (new DomDocumentHtmlParser())->parse($html, null, $configuration);
+
+        self::assertSame(
+            "VPM/1\n\n@e1 page\n  @e2 main\n    @e3 section\n      @e4 button \"Keep\" [type=submit] {?click, ?focus}\n",
+            $document->toText(),
+        );
+        self::assertNull($document->ref('@e5'));
+    }
+
+    public function testIgnoredSubtreesCannotContributeTextOrAccessibleNames(): void
+    {
+        $html = <<<'HTML'
+            <p>Keep text <span class="noise">secret text</span></p>
+            <span id="hidden-name" class="noise">Secret ARIA name</span>
+            <input aria-labelledby="hidden-name" placeholder="ARIA fallback">
+            <label class="noise" for="field">Secret label</label>
+            <input id="field" placeholder="Label fallback">
+            HTML;
+        $configuration = VoyagerPageMapConfiguration::agent()->withIgnoredSelectors(['.noise']);
+
+        $text = (new DomDocumentHtmlParser())->parse($html, null, $configuration)->toText();
+
+        self::assertStringContainsString('p "Keep text"', $text);
+        self::assertStringContainsString('input "ARIA fallback"', $text);
+        self::assertStringContainsString('input "Label fallback"', $text);
+        self::assertStringNotContainsString('secret', strtolower($text));
+    }
+
     public function testReadableNamePrecedenceAndImageAlternativeText(): void
     {
         $html = <<<'HTML'
@@ -252,13 +296,16 @@ final class DomDocumentHtmlParserTest extends TestCase
     {
         $parser = new DomDocumentHtmlParser();
         $resolved = $parser->parse(
-            '<a href="../account">Account</a>',
+            '<button class="noise">Ignored</button><a href="../account">Account</a>',
             'https://example.com/shop/products',
-            VoyagerPageMapConfiguration::default()->withRelativeUrlResolution(),
+            VoyagerPageMapConfiguration::default()
+                ->withRelativeUrlResolution()
+                ->withIgnoredSelectors(['.noise']),
         );
-        $fresh = $parser->parse('<button>Fresh</button>', null, VoyagerPageMapConfiguration::default());
+        $fresh = $parser->parse('<button class="noise">Fresh</button>', null, VoyagerPageMapConfiguration::default());
 
         self::assertStringContainsString('@e2 a "Account" -> ../../account', $resolved->toText());
+        self::assertStringNotContainsString('Ignored', $resolved->toText());
         self::assertSame(
             "VPM/1\n\n@e1 page\n  @e2 button \"Fresh\" [type=submit] {?click, ?focus}\n",
             $fresh->toText(),
