@@ -1,5 +1,11 @@
 # Voyager Page Map
 
+[![CI](https://github.com/North-Foundry/voyager-page-map-php/actions/workflows/ci.yml/badge.svg)](https://github.com/North-Foundry/voyager-page-map-php/actions/workflows/ci.yml)
+[![Latest Stable Version](https://img.shields.io/packagist/v/north-foundry/voyager-page-map-php.svg)](https://packagist.org/packages/north-foundry/voyager-page-map-php)
+[![Total Downloads](https://img.shields.io/packagist/dt/north-foundry/voyager-page-map-php.svg)](https://packagist.org/packages/north-foundry/voyager-page-map-php)
+[![PHP Version](https://img.shields.io/packagist/dependency-v/north-foundry/voyager-page-map-php/php.svg)](https://packagist.org/packages/north-foundry/voyager-page-map-php)
+[![License](https://img.shields.io/packagist/l/north-foundry/voyager-page-map-php.svg)](LICENSE)
+
 **Turn static HTML into deterministic page context for LLMs.**
 
 Voyager Page Map (VPM) is a PHP library that parses static HTML into `VPM/1`: a semantic, HTML-first text representation designed to be included in an LLM prompt.
