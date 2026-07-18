@@ -1,0 +1,12 @@
+{
+    "name": "north-foundry/parse-voyager-page-map-example",
+    "description": "Standalone PHPeg example that parses a Voyager Page Map document.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "emanuelecoppola/phpeg": "^1.0"
+    },
+    "scripts": {
+        "parse": "php parse-voyager-page-map.php"
+    }
+}

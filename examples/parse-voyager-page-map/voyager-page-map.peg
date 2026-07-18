@@ -1,0 +1,28 @@
+# A structural grammar for VPM/1 documents.
+#
+# Whitespace skipping is disabled by the runner: indentation and line breaks are
+# part of VPM's readable tree format. ElementLine models standard VPM nodes;
+# DestinationLine and DestinationCloseLine cover a multi-source image block.
+
+VoyagerPageMap = Header BlankLine VpmLine* EOF
+
+Header = Magic NewLine TitleLine UrlLine
+Magic = "VPM/1"
+TitleLine = "title" HorizontalSpace Value NewLine
+UrlLine = "url" HorizontalSpace Url NewLine
+
+VpmLine = ElementLine / DestinationLine / DestinationCloseLine
+ElementLine = Indent Reference HorizontalSpace ElementKind ElementTail NewLine
+DestinationLine = Indent DestinationKey HorizontalSpace "->" HorizontalSpace Value NewLine
+DestinationCloseLine = Indent "}" ElementTail NewLine
+
+Reference = r'@e[1-9][0-9]*'
+ElementKind = r'[a-z][a-z0-9-]*'
+DestinationKey = r'(?:src|[0-9]+w|[0-9]+x)'
+ElementTail = r'[^\r\n]*'
+Url = r'[^\r\n]+'
+Value = r'[^\r\n]+'
+Indent = r'[ \t]*'
+HorizontalSpace = r'[ \t]+'
+BlankLine = NewLine
+NewLine = "\r\n" / "\n"

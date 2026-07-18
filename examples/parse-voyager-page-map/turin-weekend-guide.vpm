@@ -1,0 +1,84 @@
+VPM/1
+title "Turin Weekend Guide | Piedmont, Italy"
+url https://example.test/guides/turin-weekend-guide.html
+
+@e1 page [lang=en]
+  @e2 header
+    @e3 a "Northbound Notes" -> ../../ {?click, ?open}
+    @e4 nav "Primary navigation"
+      @e5 a "Places" -> #places {?click, ?open}
+      @e6 a "Itinerary" -> #itinerary {?click, ?open}
+      @e7 a "Plan your trip" -> #plan {?click, ?open}
+  @e8 section "Turin, at an unhurried pace."
+    @e9 p "Piedmont, Italy · A long weekend"
+    @e10 h1 "Turin, at an unhurried pace."
+    @e11 p "Baroque arcades, uncommonly good chocolate, and the Alps on the horizon: a short guide to one of Italy's most quietly magnetic cities."
+    @e12 a "Start the 48-hour route" -> #itinerary {?click, ?open}
+  @e13 main
+    @e14 section "Come for the museums. Stay for the daily ritual of the aperitivo."
+      @e15 p "A city of details"
+      @e16 h2 "Come for the museums. Stay for the daily ritual of the aperitivo."
+      @e17 p "Turin rewards wandering. Its grand boulevards lead to small coffee counters, former factories host contemporary art, and every view seems to frame the Mole Antonelliana."
+      @e18 dl
+        @e19 dt
+          @e20 text "Best time"
+        @e21 dd
+          @e22 text "April–June and September–October"
+        @e23 dt
+          @e24 text "Getting around"
+        @e25 dd
+          @e26 text "Walk, tram, and metro"
+        @e27 dt
+          @e28 text "Essential order"
+        @e29 dd
+          @e30 text "A bicerin at Caffè Al Bicerin"
+    @e31 section "A little culture, a lot of character."
+      @e32 p "Three essential stops"
+      @e33 h2 "A little culture, a lot of character."
+      @e34 article
+        @e35 img "Historic arcades in central Turin" -> https://images.unsplash.com/photo-1569959220744-ff553533f492?auto=format&fit=crop&w=900&q=80 [alt="Historic arcades in central Turin"]
+        @e36 h3 "Portici and piazzas"
+        @e37 p "Start beneath the sheltered arcades of Via Roma and drift toward Piazza San Carlo for a slow first espresso."
+        @e38 a "Take the walking route" -> ../../turin/portici-walk {?click, ?open}
+      @e39 article
+        @e40 img "Museum gallery in Turin" -> https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=900&q=80 [alt="Museum gallery in Turin"]
+        @e41 h3 "Museo Egizio"
+        @e42 p "Give this exceptional Egyptian collection at least two unhurried hours, then pause in the bookshop."
+        @e43 a "Visit the museum website" -> https://museoegizio.it/en/ {?click, ?open}
+      @e44 article
+        @e45 img "A view across the city toward the Alps" -> https://images.unsplash.com/photo-1515442261605-65987783cb6a?auto=format&fit=crop&w=900&q=80 [alt="A view across the city toward the Alps"]
+        @e46 h3 "Monte dei Cappuccini"
+        @e47 p "Cross the Po before sunset for the city's classic panorama: rooftops, Mole, and the Alpine line beyond."
+        @e48 a "See the viewpoint details" -> ../../turin/sunset-view {?click, ?open}
+    @e49 section "Your first day in Turin."
+      @e50 p "The short version"
+      @e51 h2 "Your first day in Turin."
+      @e52 article
+        @e53 time
+          @e54 text "09:00 — Centro"
+        @e55 h3 "Breakfast with a bicerin"
+        @e56 p "Order the warm chocolate-coffee-cream drink that Turin made famous, with a small pastry on the side."
+      @e57 article
+        @e58 time
+          @e59 text "11:00 — Via Accademia"
+        @e60 h3 "Lose track of time at Museo Egizio"
+        @e61 p "Book a timed entry in advance, particularly on weekends and school holidays."
+      @e62 article
+        @e63 time
+          @e64 text "16:30 — Quadrilatero Romano"
+        @e65 h3 "Browse, then linger for aperitivo"
+        @e66 p "The old Roman quarter is ideal for a late-afternoon glass of vermouth and a plate of local cheeses."
+    @e67 section "Build your Turin shortlist."
+      @e68 p "Save this guide"
+      @e69 h2 "Build your Turin shortlist."
+      @e70 p "Choose your travel window and we will send a concise, printable version of this itinerary."
+      @e71 form "Turin guide request" [action="../../newsletter", method=post]
+        @e72 input "Email address" [type=email, name=email, placeholder="you@example.com", autocomplete=email, required, empty] {?fill, ?clear, ?focus}
+        @e73 select "When are you visiting?" [name=season] {?select, ?focus}
+          @e74 option "Spring" [value=spring]
+          @e75 option "Summer" [value=summer]
+          @e76 option "Autumn" [value=autumn]
+          @e77 option "Winter" [value=winter]
+        @e78 button "Send me the guide" [type=submit] {?click, ?focus}
+  @e79 footer
+    @e80 p "Northbound Notes · An imaginary city guide made for the Voyager Page Map example."

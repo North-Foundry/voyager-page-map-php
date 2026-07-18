@@ -1,0 +1,71 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "4d25f233dbebae1c2dd6686c899377d7",
+    "packages": [
+        {
+            "name": "emanuelecoppola/phpeg",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EmanueleCoppola/phpeg.git",
+                "reference": "c81286fa14c29dabc65afc0b671ef5dbbb358baa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EmanueleCoppola/phpeg/zipball/c81286fa14c29dabc65afc0b671ef5dbbb358baa",
+                "reference": "c81286fa14c29dabc65afc0b671ef5dbbb358baa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1 <9.0"
+            },
+            "require-dev": {
+                "laravel-zero/framework": "^10.48.25",
+                "phpunit/phpunit": "^10.5 || ^11.5",
+                "symfony/polyfill-mbstring": "^1.37"
+            },
+            "bin": [
+                "bin/phpeg"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EmanueleCoppola\\PHPeg\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A modern PHP PEG parsing library.",
+            "support": {
+                "issues": "https://github.com/EmanueleCoppola/phpeg/issues",
+                "source": "https://github.com/EmanueleCoppola/phpeg/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/emanuelecoppola",
+                    "type": "buy_me_a_coffee"
+                },
+                {
+                    "url": "https://github.com/EmanueleCoppola",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-05-11T02:13:27+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
+}
